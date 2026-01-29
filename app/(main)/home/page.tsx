@@ -47,9 +47,22 @@ export default function HomePage() {
             <TopBar title="Hello, Guardian" subtitle="Welcome back" />
 
             <div className="px-6 mt-4">
-                <Link href="/quest" className="inline-flex items-center gap-2 px-3 py-1.5 bg-lime/10 text-lime-dark rounded-full text-xs font-medium hover:bg-lime/20 transition-colors">
-                    <span>3 badges to reach Steward</span>
-                    <ArrowRight size={12} />
+                <Link href="/quest" className="block w-full max-w-sm">
+                    <div className="flex flex-col gap-2 p-3 rounded-2xl bg-zinc-50 border border-zinc-100 hover:border-lime/30 hover:bg-lime/5 transition-all group">
+                        {/* Progress Bar Container */}
+                        <div className="h-2.5 w-full bg-zinc-200 rounded-full overflow-hidden">
+                            {/* Fill (70%) */}
+                            <div className="h-full bg-lime rounded-full w-[70%]" aria-label="Progress: 70%" />
+                        </div>
+
+                        {/* Text Below */}
+                        <div className="flex justify-between items-center px-1">
+                            <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                                3 badges to reach <span className="text-lime-dark font-bold">Steward</span>
+                            </span>
+                            <ArrowRight size={14} className="text-zinc-300 group-hover:text-lime-dark transition-colors" />
+                        </div>
+                    </div>
                 </Link>
             </div>
 
