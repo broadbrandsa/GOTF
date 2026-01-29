@@ -58,12 +58,49 @@ export default function HomePage() {
                     <MapPin size={12} />
                     Your location: <span className="text-foreground font-semibold">{city}</span>
                 </div>
-
-                <p className="mt-4 text-muted-foreground">
-                    Here’s what’s coming up near you.
-                </p>
             </div>
 
+            {/* "Your Upcoming" Section */}
+            <div className="px-6 mb-8 mt-4">
+                <h2 className="text-lg font-bold text-foreground mb-4">Your Upcoming</h2>
+                {/* Horizontal Scroll / or Single Hero Card */}
+                {/* Request: "Add ONE featured block/card that looks like a hero card ... width: 40vw ... height: 50vh" */}
+                {/* For a single item, we just render it. Let's pick a mock item. */}
+                {/* Let's use 'p1' (Beach Cleanup) or similar as a Featured Item since we don't have auth/user logic */}
+                {(() => {
+                    const featuredItem = PARTICIPATION_ITEMS.find(p => p.id === 'p1') || PARTICIPATION_ITEMS[0];
+                    return (
+                        <Link href={`/p/${featuredItem.id}`} className="block relative h-[50vh] w-[70vw] sm:w-[50vw] max-w-sm rounded-2xl overflow-hidden shadow-md group">
+                            <img
+                                src={featuredItem.imageUrl || '/images/event-local-action-1.jpg'}
+                                alt={featuredItem.title}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5">
+                                <div className="absolute top-4 left-4">
+                                    <div className="bg-white/90 backdrop-blur-md text-black px-2.5 py-1 rounded-full text-[10px] font-bold shadow-sm uppercase tracking-wide">
+                                        {featuredItem.type}
+                                    </div>
+                                </div>
+
+                                <h3 className="text-white font-bold text-xl leading-tight mb-1 drop-shadow-sm line-clamp-2">
+                                    {featuredItem.title}
+                                </h3>
+                                <div className="flex items-center gap-2 text-white/80 text-xs font-medium">
+                                    <span>{new Date(featuredItem.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
+                                    <span>•</span>
+                                    <span>{featuredItem.city}</span>
+                                </div>
+                            </div>
+                        </Link>
+                    );
+                })()}
+            </div>
+
+            <div className="px-6 mb-4">
+                <h2 className="text-lg font-bold text-foreground">Here&apos;s what&apos;s coming up near you</h2>
+            </div>
             <div className="px-6 space-y-4">
                 {feed.length > 0 ? (
                     feed.map(item => (
