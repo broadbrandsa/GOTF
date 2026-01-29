@@ -19,20 +19,20 @@ export function BottomNav() {
     const allItems = navItems;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-white/90 backdrop-blur-md pb-safe">
-            <nav className="flex justify-around items-center h-16 px-2">
+        <div className="fixed bottom-4 inset-x-4 max-w-md mx-auto z-50">
+            <nav className="flex justify-around items-center h-[72px] rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-zinc-200/50 px-2 pb-1">
                 {allItems.map((item) => {
                     const isActive = pathname.startsWith(item.href);
                     const Icon = item.icon;
 
-                    // Simple color logic
-                    let activeColorClass = "text-foreground";
+                    // Active Circle Color Logic
+                    let activeBgClass = "bg-zinc-100";
                     if (isActive) {
-                        if (item.label === 'Events') activeColorClass = "text-lime-dark";
-                        else if (item.label === 'Challenges') activeColorClass = "text-sky-600";
-                        else if (item.label === 'Community') activeColorClass = "text-orange-500";
-                        else if (item.label === 'Outcomes') activeColorClass = "text-teal-600";
-                        else activeColorClass = "text-lime-dark"; // Home default
+                        if (item.label === 'Events') activeBgClass = "bg-[#d9f99d]"; // Lime-200ish
+                        else if (item.label === 'Challenges') activeBgClass = "bg-sky-200";
+                        else if (item.label === 'Community') activeBgClass = "bg-orange-200";
+                        else if (item.label === 'Outcomes') activeBgClass = "bg-teal-200";
+                        else activeBgClass = "bg-[#d9f99d]"; // Home default (Lime)
                     }
 
                     return (
@@ -41,20 +41,23 @@ export function BottomNav() {
                             href={item.href}
                             className={clsx(
                                 "flex flex-col items-center justify-center w-full h-full space-y-1 relative",
-                                isActive ? activeColorClass : "text-muted hover:text-foreground/80"
+                                isActive ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-700"
                             )}
                         >
-                            <div className="relative">
-                                <Icon size={20} className={isActive ? "stroke-[2.5px]" : "stroke-2"} />
-                                {isActive && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-current" />}
+                            <div className={clsx(
+                                "flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300",
+                                isActive ? activeBgClass : "bg-transparent"
+                            )}>
+                                <Icon size={20} className={isActive ? "stroke-[2.5px] text-zinc-900" : "stroke-2"} />
                             </div>
-                            <span className="text-[10px] font-medium leading-none">{item.label}</span>
+                            <span className={clsx(
+                                "text-[10px] font-medium leading-none transition-colors",
+                                isActive ? "text-zinc-900" : "text-zinc-500"
+                            )}>{item.label}</span>
                         </Link>
                     );
                 })}
             </nav>
-            {/* Safe area spacer for iPhone home bar handled by padding-bottom env or simple spacer if needed */}
-            <div className="h-6 w-full" />
         </div>
     );
 }
