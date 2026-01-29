@@ -31,7 +31,7 @@ export default function EventsPage() {
                 {/* Dropdown Menu */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium border-border hover:bg-zinc-50 hover:text-foreground justify-between gap-2">
+                        <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium border-border bg-white shadow-sm hover:bg-zinc-50 whitespace-nowrap gap-2">
                             Cape Town
                             <ChevronDown size={14} className="text-muted-foreground" />
                         </Button>

@@ -1,4 +1,5 @@
-import { UserCircle } from 'lucide-react';
+import { UserCircle, Bell } from 'lucide-react';
+import Link from 'next/link';
 
 interface TopBarProps {
     title?: string;
@@ -14,8 +15,14 @@ export function TopBar({ title, subtitle, showProfile = true }: TopBarProps) {
                 {title && <h1 className="text-2xl font-semibold text-foreground">{title}</h1>}
             </div>
             {showProfile && (
-                <div className="w-9 h-9 rounded-full overflow-hidden border border-border shadow-sm">
-                    <img src="/images/profile-icon.jpg" alt="Profile" className="w-full h-full object-cover" />
+                <div className="flex items-center gap-3">
+                    <div className="relative">
+                        <Bell size={20} className="text-zinc-500" />
+                        <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red-500 border border-white" />
+                    </div>
+                    <Link href="/profile" className="w-9 h-9 rounded-full overflow-hidden border border-border shadow-sm">
+                        <img src="/images/profile-icon.jpg" alt="Profile" className="w-full h-full object-cover" />
+                    </Link>
                 </div>
             )}
         </div>

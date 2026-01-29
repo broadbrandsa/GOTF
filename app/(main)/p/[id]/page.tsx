@@ -6,7 +6,6 @@ import { Calendar, MapPin, CheckCircle, ArrowLeft, ArrowRight } from 'lucide-rea
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { clsx } from 'clsx';
-import { TopBar } from '@/components/TopBar';
 
 interface PageProps {
     params: Promise<{ id: string }>;
@@ -51,58 +50,48 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                     </Link>
                 </div>
 
-                {/* Type Pill (Top Left, below back button area or inline?) 
-                    Request: "Move type pill to top-left of hero image" 
-                    Let's place it below the back button to not crowd it, or aligned with it?
-                    "Position absolute top-left inside the image."
-                    Let's put it at top-16 (approx 64px down) to clear the back button area safely.
-                */}
-                <div className="absolute top-16 left-6 z-20">
-                    <Badge variant="secondary" className="bg-white/90 backdrop-blur-md text-black hover:bg-white border-white/20 capitalize font-medium shadow-sm px-3 py-1">
-                        {item.type}
-                    </Badge>
-                </div>
-
-                {/* Status Pill (Top Right) */}
-                {!isClosed && (
-                    <div className="absolute top-16 right-6 z-20">
-                        <span className={clsx("text-[10px] px-2.5 py-1 rounded-full font-bold border shadow-sm backdrop-blur-md", statusClasses)}>
-                            {statusLabel}
-                        </span>
-                    </div>
-                )}
-                {isClosed && (
-                    <div className="absolute top-16 right-6 z-20">
-                        <span className="text-[10px] px-2.5 py-1 rounded-full font-bold bg-zinc-800/80 text-white backdrop-blur-md border border-white/10 shadow-sm">
-                            Closed
-                        </span>
-                    </div>
-                )}
-
-
                 {/* Bottom Blur Gradient Overlay */}
                 <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/95 via-black/60 to-transparent flex flex-col justify-end px-6 pb-8 z-10 pointer-events-none">
                     {/* Content Container */}
-                    <div className="pointer-events-auto space-y-2">
+                    <div className="pointer-events-auto text-left">
+
+                        {/* Pills Row (Type + Status + Earn Badge) */}
+                        <div className="flex flex-wrap items-center gap-2 mb-3">
+                            {/* Type Pill */}
+                            <Badge variant="secondary" className="bg-white/90 backdrop-blur-md text-black hover:bg-white border-white/20 capitalize font-medium shadow-sm px-2.5 py-0.5 h-6">
+                                {item.type}
+                            </Badge>
+
+                            {/* Status Pill */}
+                            {!isClosed && (
+                                <span className={clsx("text-[10px] px-2.5 h-6 flex items-center rounded-full font-bold border shadow-sm backdrop-blur-md", statusClasses)}>
+                                    {statusLabel}
+                                </span>
+                            )}
+                            {isClosed && (
+                                <span className="text-[10px] px-2.5 h-6 flex items-center rounded-full font-bold bg-zinc-800/80 text-white backdrop-blur-md border border-white/10 shadow-sm">
+                                    Closed
+                                </span>
+                            )}
+
+                            {/* Gamification Pill */}
+                            {(item.badgesAwarded?.length || 0) > 0 && (
+                                <div className="inline-flex items-center px-2.5 h-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white shadow-sm">
+                                    <span className="mr-1 text-sm">🏆</span>
+                                    Earn {item.badgesAwarded?.length} badge{item.badgesAwarded!.length > 1 ? 's' : ''}
+                                </div>
+                            )}
+                        </div>
+
                         {/* Title */}
-                        <h1 className="text-3xl sm:text-4xl font-bold leading-tight text-white drop-shadow-sm">
+                        <h1 className="text-3xl sm:text-4xl font-bold leading-tight text-white drop-shadow-sm mb-2">
                             {item.title}
                         </h1>
 
                         {/* Goal Description (Short) */}
-                        <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed line-clamp-3 mb-1">
+                        <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed line-clamp-3">
                             {item.goal}
                         </p>
-
-                        {/* Gamification Pill */}
-                        {(item.badgesAwarded?.length || 0) > 0 && (
-                            <div className="flex items-center gap-2 pt-2">
-                                <div className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-white shadow-sm">
-                                    <span className="mr-1.5 text-base">🏆</span>
-                                    Earn {item.badgesAwarded?.length} badge{item.badgesAwarded!.length > 1 ? 's' : ''}
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
