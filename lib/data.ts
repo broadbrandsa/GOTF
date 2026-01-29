@@ -48,7 +48,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Family Friendly', 'Outdoors'],
         badgesAwarded: [BADGES[1]],
         earnedBadgeName: 'Eco-Warrior',
-        imageUrl: '/images/event-local-action-1.jpg',
+        imageUrl: '/images/Beach Cleanup.jpg',
         joinedMemberIds: ['m1', 'm2', 'm4']
     },
     {
@@ -66,7 +66,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Remote', 'Action'],
         badgesAwarded: [BADGES[1]],
         earnedBadgeName: 'Innovator',
-        imageUrl: '/images/event-water.jpg',
+        imageUrl: '/images/Plastic free week.jpg',
         joinedMemberIds: ['m3', 'm5']
     },
     {
@@ -126,7 +126,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[6]],
         earnedBadgeName: 'Local Hero',
         researchPartner: 'Western Leopard Toad Conservation Committee',
-        imageUrl: '/images/challenge-citizen-science.jpg',
+        imageUrl: '/images/spot the leopard Toad.jpg',
         joinedMemberIds: ['m4', 'm5']
     },
     {
@@ -146,7 +146,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[2]],
         earnedBadgeName: 'Eco-Warrior',
         researchPartner: 'BirdLife South Africa',
-        imageUrl: '/images/challenge-citizen-science.jpg',
+        imageUrl: '/images/Table bay bird spotting.jpg',
         joinedMemberIds: ['m1']
     },
     {
@@ -166,7 +166,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[5]],
         earnedBadgeName: 'Guardian',
         researchPartner: 'SANCCOB',
-        imageUrl: '/images/event-water.jpg', // Reusing water image for marine topic
+        imageUrl: '/images/Boulders beach penguin count.jpg',
         joinedMemberIds: ['m1', 'm2', 'm3']
     },
     {
@@ -184,7 +184,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Service', 'Community'],
         badgesAwarded: [BADGES[0]],
         earnedBadgeName: 'Local Hero',
-        imageUrl: '/images/event-local-action-2.jpg',
+        imageUrl: '/images/Community kitchen volunteer.jpg',
         joinedMemberIds: ['m3']
     },
     // Discover Items (Learning)
@@ -223,7 +223,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['In-person', 'Learning'],
         badgesAwarded: [BADGES[2]],
         earnedBadgeName: 'Learner',
-        imageUrl: '/images/event-water.jpg',
+        imageUrl: '/images/Cape Town water stories.jpg',
         joinedMemberIds: ['m4']
     },
     // Closed Outcomes
@@ -245,7 +245,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         earnedBadgeName: 'Steward',
         outcomeSummary: 'We collected 45kg of waste, 60% of which was single-use food packaging. Data submitted to city council.',
         outcomeImage: '/images/outcome-1.jpg',
-        imageUrl: '/images/event-local-action-1.jpg',
+        imageUrl: '/images/Sea point promenade.jpg',
         contributedMemberIds: ['m1', 'm2', 'm3', 'm4', 'm5']
     },
     {
@@ -266,7 +266,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         earnedBadgeName: 'Guardian',
         outcomeSummary: 'Removed 12 active snares from the upper trail loops, preventing harm to local porcupines and caracals.',
         outcomeImage: '/images/outcome-2.jpg',
-        imageUrl: '/images/event-local-action-2.jpg',
+        imageUrl: '/images/Tokai Trail.jpg',
         contributedMemberIds: ['m4']
     },
 ];
