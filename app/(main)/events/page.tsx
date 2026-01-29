@@ -14,9 +14,9 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function EventsPage() {
-    // Filter: Events + Webinars
+    // Filter: Events (but EXCLUDE Learning/Webinars which are now in Discover)
     const events = PARTICIPATION_ITEMS
-        .filter(item => (item.type === 'event' || item.type === 'webinar') && item.status === 'open')
+        .filter(item => (item.type === 'event' || item.type === 'webinar') && item.status === 'open' && item.category !== 'Learning')
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     return (

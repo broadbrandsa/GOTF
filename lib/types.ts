@@ -36,5 +36,6 @@ export interface Member {
   name: string;
   tier: 'Volunteer' | 'Guardian' | 'Steward' | 'GOF';
   city: string;
-  avatar: string; // placeholder text or url
+  avatarImage: string; // Path to local image
+  badgesEarned: number;
 }
