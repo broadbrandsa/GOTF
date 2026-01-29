@@ -19,7 +19,9 @@ export interface Participation {
   status: ParticipationStatus;
   city: string;
   area?: string; // Specific neighborhood
-  date: string; // ISO string
+  date: string; // ISO string Start
+  endDate?: string; // ISO string End (optional)
+  platform?: string; // e.g. 'Zoom', 'Google Meets' for online
   goal: string;
   whyItMatters: string;
   whatYouDo: string[];

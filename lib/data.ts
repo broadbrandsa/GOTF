@@ -47,6 +47,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Meet at Surfer’s Corner', 'Collect bags and gloves', 'Clean the beach for 2 hours', 'Sort waste for recycling'],
         tags: ['Family Friendly', 'Outdoors'],
         badgesAwarded: [BADGES[1]],
+        imageUrl: '/images/event-local-action-1.jpg'
     },
     {
         id: 'p2',
@@ -62,6 +63,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Refuse straws and bags', 'Use reusable cups', 'Buy loose vegetables', 'Log your success daily'],
         tags: ['Remote', 'Action'],
         badgesAwarded: [BADGES[1]],
+        imageUrl: '/images/event-water.jpg'
     },
     {
         id: 'p3',
@@ -72,11 +74,13 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         status: 'open',
         city: 'Cape Town',
         date: '2026-02-10T18:00:00Z',
+        platform: 'Google Meets',
         goal: 'Learn how to start a food garden in small spaces.',
         whyItMatters: 'Food security starts at home. Local food reduces carbon footprint.',
         whatYouDo: ['Register for Zoom link', 'Prepare questions', 'Join the live session'],
         tags: ['Online', 'Beginner'],
         badgesAwarded: [BADGES[2]],
+        imageUrl: '/images/event-learning.jpg'
     },
     {
         id: 'p4',
@@ -95,6 +99,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[1]],
         outcomeSummary: 'We cleared 2 hectares of alien vegetation, saving an estimated 10,000 liters of water per year for the catchment area.',
         outcomeImage: '/images/outcome-1.jpg',
+        imageUrl: '/images/event-local-action-2.jpg'
     },
     {
         id: 'p5',
@@ -112,6 +117,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Night', 'Nature', 'Citizen Science'],
         badgesAwarded: [BADGES[6]],
         researchPartner: 'Western Leopard Toad Conservation Committee',
+        imageUrl: '/images/challenge-citizen-science.jpg'
     },
     {
         id: 'p7',
@@ -129,6 +135,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Daytime', 'Coastal', 'Citizen Science'],
         badgesAwarded: [BADGES[2]],
         researchPartner: 'BirdLife South Africa',
+        imageUrl: '/images/challenge-citizen-science.jpg'
     },
     {
         id: 'p8',
@@ -146,6 +153,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Wildlife', 'Count-based', 'Citizen Science'],
         badgesAwarded: [BADGES[5]],
         researchPartner: 'SANCCOB',
+        imageUrl: '/images/event-water.jpg' // Reusing water image for marine topic
     },
     {
         id: 'p6',
@@ -161,6 +169,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Prep vegetables', 'Cook immense pots', 'Serve meals', 'Clean up'],
         tags: ['Service', 'Community'],
         badgesAwarded: [BADGES[0]],
+        imageUrl: '/images/event-local-action-2.jpg'
     },
     // Discover Items (Learning)
     {
@@ -172,6 +181,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         status: 'open',
         city: 'Cape Town',
         date: '2026-03-05T18:00:00Z',
+        platform: 'Zoom',
         goal: 'Understand how small urban gardens support biodiversity.',
         whyItMatters: 'Urban rewilding connects fragmented habitats.',
         whatYouDo: ['Watch the stream', 'Q&A with ecologist'],
@@ -214,6 +224,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[1]],
         outcomeSummary: 'We collected 45kg of waste, 60% of which was single-use food packaging. Data submitted to city council.',
         outcomeImage: '/images/outcome-1.jpg',
+        imageUrl: '/images/event-local-action-1.jpg'
     },
     {
         id: 'p12',
@@ -232,5 +243,6 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[1]],
         outcomeSummary: 'Removed 12 active snares from the upper trail loops, preventing harm to local porcupines and caracals.',
         outcomeImage: '/images/outcome-2.jpg',
+        imageUrl: '/images/event-local-action-2.jpg'
     },
 ];

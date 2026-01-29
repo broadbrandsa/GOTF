@@ -3,6 +3,7 @@ import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { Participation } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
+import { clsx } from 'clsx';
 
 interface ParticipationCardProps {
     item: Participation;
@@ -10,65 +11,71 @@ interface ParticipationCardProps {
 
 export function ParticipationCard({ item }: ParticipationCardProps) {
     const isClosed = item.status === 'closed';
+    const isOnline = item.mode === 'online';
 
-    // Format date
-    const dateObj = new Date(item.date);
-    const dateString = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    const timeString = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    // Status Pill Logic
+    const now = new Date();
+    const startDate = new Date(item.date);
+    const isUpcoming = startDate > now;
+    const statusLabel = isUpcoming ? "Upcoming" : "Live";
+    const statusColor = isUpcoming ? "bg-zinc-100 text-zinc-600" : "bg-red-50 text-red-600 animate-pulse border-red-100";
 
     return (
         <Link href={`/p/${item.id}`} className="block group">
-            <Card className="transition-all active:scale-[0.98] border-border/60 hover:border-lime/50 h-full flex flex-col group-hover:shadow-md">
-                <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start mb-1">
-                        <Badge variant={item.category === 'Citizen Science' ? 'lilac' : item.category === 'Local Action' ? 'lime' : 'soft'}>
-                            {item.category}
-                        </Badge>
-                        <div className="flex gap-1.5">
-                            {item.mode === 'online' && <Badge variant="secondary" className="text-[10px] px-2">Online</Badge>}
-                            {isClosed && <Badge variant="outline" className="text-muted-foreground border-border text-[10px] px-2">Closed</Badge>}
-                        </div>
-                    </div>
-                    <CardTitle className="text-lg leading-tight group-hover:text-lime-dark transition-colors">
-                        {item.title}
-                    </CardTitle>
-                </CardHeader>
+            <Card className="hover:shadow-lg transition-all duration-300 border-border/50 overflow-hidden flex h-32 active:scale-[0.99]">
+                {/* Content Section (Left) */}
+                <div className="flex-1 flex flex-col justify-between p-4 min-w-0">
+                    <div>
+                        <div className="flex items-start justify-between gap-2 mb-1">
+                            {/* Badges Row */}
+                            <div className="flex flex-wrap gap-1.5 items-center">
+                                <Badge variant="secondary" className={clsx(
+                                    "text-[10px] px-1.5 py-0 h-5 font-normal",
+                                    item.category === 'Citizen Science' ? "bg-sky-100 text-sky-700 hover:bg-sky-100" :
+                                        item.category === 'Learning' ? "bg-amber-100 text-amber-700 hover:bg-amber-100" :
+                                            "bg-lime/20 text-lime-dark hover:bg-lime/20"
+                                )}>
+                                    {item.type}
+                                </Badge>
 
-                <CardContent className={`flex-1 pb-4 ${item.type === 'challenge' ? 'flex flex-row gap-4' : ''}`}>
-                    <div className="flex-1 space-y-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                            <Calendar size={14} className="text-lime-dark" />
-                            <span>{dateString} • {timeString}</span>
+                                {/* Status Pill (Only for Open items) */}
+                                {!isClosed && (
+                                    <span className={clsx("text-[9px] px-1.5 py-0.5 rounded-full font-semibold border border-transparent", statusColor)}>
+                                        {statusLabel}
+                                    </span>
+                                )}
+                            </div>
                         </div>
-                        {item.city && (
-                            <div className="flex items-center gap-2">
-                                <MapPin size={14} className="text-lime-dark" />
-                                <span>{item.city}{item.area ? `, ${item.area}` : ''}</span>
-                            </div>
-                        )}
 
-                        {isClosed && item.outcomeSummary && (
-                            <div className="mt-4 p-3 bg-zinc-50 rounded-xl text-xs text-zinc-600 italic border border-zinc-100">
-                                "{item.outcomeSummary}"
-                            </div>
-                        )}
+                        <h3 className="font-bold text-sm leading-tight group-hover:text-lime-dark transition-colors line-clamp-2 mt-1">
+                            {item.title}
+                        </h3>
                     </div>
 
-                    {item.type === 'challenge' && (
-                        <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0">
-                            <img src={item.category === 'Citizen Science' ? '/images/challenge-citizen-science.jpg' : '/images/event-local-action-1.jpg'} alt={item.title} className="w-full h-full object-cover" />
+                    <div className="space-y-1 mt-auto">
+                        <div className="flex items-center text-xs text-muted-foreground">
+                            <Calendar size={12} className="mr-1.5 shrink-0" />
+                            {new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                         </div>
-                    )}
-                </CardContent>
+                        <div className="flex items-center text-xs text-muted-foreground truncate">
+                            <MapPin size={12} className="mr-1.5 shrink-0" />
+                            {isOnline ? (
+                                <span className="font-medium text-indigo-500">{item.platform || 'Online'}</span>
+                            ) : (
+                                <span className="truncate">{item.area || item.city}</span>
+                            )}
+                        </div>
+                    </div>
+                </div>
 
-                {/* Footer */}
-                <CardFooter className="pt-0 flex items-center justify-between border-t border-border/30 mt-auto p-4 bg-zinc-50/50 rounded-b-2xl">
-                    <span className="text-xs font-semibold text-lime-dark flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                        {item.type === 'challenge' ? 'Join Challenge' : 'View Event'}
-                        <ArrowRight size={12} />
-                    </span>
-                    {/* Visual indicator of badges removed per request */}
-                </CardFooter>
+                {/* Image Section (Right) */}
+                <div className="w-28 shrink-0 h-full relative bg-zinc-100">
+                    <img
+                        src={item.imageUrl || '/images/event-local-action-1.jpg'}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
             </Card>
         </Link>
     );
