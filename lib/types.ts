@@ -26,6 +26,7 @@ export interface Participation {
   tags: string[];
   badgesAwarded?: Badge[];
   outcomeSummary?: string; // Only for closed items
+  outcomeImage?: string; // New field for outcome image
   imageUrl?: string; // For visual demo
 }
 

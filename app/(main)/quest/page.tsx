@@ -1,7 +1,7 @@
 'use client';
 
 import { TopBar } from '@/components/TopBar';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { BADGES, MOCK_USER_BADGES } from '@/lib/data';
 import { BadgeIcon } from '@/components/BadgeIcon';
 

@@ -14,8 +14,8 @@ export function TopBar({ title, subtitle, showProfile = true }: TopBarProps) {
                 {title && <h1 className="text-2xl font-semibold text-foreground">{title}</h1>}
             </div>
             {showProfile && (
-                <div className="bg-white p-2 rounded-full shadow-sm border border-border">
-                    <UserCircle className="text-muted" size={24} />
+                <div className="w-9 h-9 rounded-full overflow-hidden border border-border shadow-sm">
+                    <img src="/images/profile-icon.jpg" alt="Profile" className="w-full h-full object-cover" />
                 </div>
             )}
         </div>

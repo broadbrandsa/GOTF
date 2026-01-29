@@ -94,6 +94,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         tags: ['Physical', 'Nature'],
         badgesAwarded: [BADGES[1]],
         outcomeSummary: 'We cleared 2 hectares of alien vegetation, saving an estimated 10,000 liters of water per year for the catchment area.',
+        outcomeImage: '/images/outcome-1.jpg',
     },
     {
         id: 'p5',

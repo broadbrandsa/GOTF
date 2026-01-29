@@ -3,12 +3,18 @@
 import { ParticipationCard } from '@/components/ParticipationCard';
 import { TopBar } from '@/components/TopBar';
 import { PARTICIPATION_ITEMS } from '@/lib/data';
-import { Button } from '@/components/ui/Button'; // For dropdown trigger
+import { CITIES } from '@/lib/data';
 import { ChevronDown } from 'lucide-react';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export default function EventsPage() {
     // Filter: Events + Webinars
-    // Sort by date
     const events = PARTICIPATION_ITEMS
         .filter(item => item.type === 'event' || item.type === 'webinar')
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -22,11 +28,22 @@ export default function EventsPage() {
                     Join something real, in-person or online.
                 </p>
 
-                {/* Visual Dropdown */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full text-sm font-medium shadow-sm">
-                    <span>Cape Town</span>
-                    <ChevronDown size={14} className="text-muted" />
-                </div>
+                {/* Dropdown Menu */}
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium border-border hover:bg-zinc-50 hover:text-foreground justify-between gap-2">
+                            Cape Town
+                            <ChevronDown size={14} className="text-muted-foreground" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start">
+                        {CITIES.map(city => (
+                            <DropdownMenuItem key={city}>
+                                {city}
+                            </DropdownMenuItem>
+                        ))}
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
             <div className="px-6 space-y-4">

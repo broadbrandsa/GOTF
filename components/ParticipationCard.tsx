@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import { Calendar, MapPin, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { Participation } from '@/lib/types';
-import { Card } from './ui/Card';
-import { Badge } from './ui/Badge';
-import { Button } from './ui/Button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
 
 interface ParticipationCardProps {
     item: Participation;
@@ -19,32 +18,31 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
 
     return (
         <Link href={`/p/${item.id}`} className="block group">
-            <Card className="transition-transform active:scale-[0.98] border-transparent hover:border-lime/50 h-full flex flex-col">
-                {/* Header Tags */}
-                <div className="flex justify-between items-start mb-3">
-                    <Badge variant={item.category === 'Citizen Science' ? 'lilac' : item.category === 'Local Action' ? 'lime' : 'default'}>
-                        {item.category}
-                    </Badge>
-                    <div className="flex gap-1">
-                        {item.mode === 'online' && <Badge variant="secondary">Online</Badge>}
-                        {isClosed && <Badge variant="outline" className="text-muted border-muted">Closed</Badge>}
+            <Card className="transition-all active:scale-[0.98] border-border/60 hover:border-lime/50 h-full flex flex-col group-hover:shadow-md">
+                <CardHeader className="pb-3">
+                    <div className="flex justify-between items-start mb-1">
+                        <Badge variant={item.category === 'Citizen Science' ? 'lilac' : item.category === 'Local Action' ? 'lime' : 'soft'}>
+                            {item.category}
+                        </Badge>
+                        <div className="flex gap-1.5">
+                            {item.mode === 'online' && <Badge variant="secondary" className="text-[10px] px-2">Online</Badge>}
+                            {isClosed && <Badge variant="outline" className="text-muted-foreground border-border text-[10px] px-2">Closed</Badge>}
+                        </div>
                     </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1">
-                    <h3 className="text-lg font-bold leading-tight mb-2 group-hover:text-lime-dark transition-colors">
+                    <CardTitle className="text-lg leading-tight group-hover:text-lime-dark transition-colors">
                         {item.title}
-                    </h3>
+                    </CardTitle>
+                </CardHeader>
 
-                    <div className="space-y-2 text-sm text-muted">
+                <CardContent className="flex-1 pb-4">
+                    <div className="space-y-2 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
-                            <Calendar size={14} />
+                            <Calendar size={14} className="text-lime-dark" />
                             <span>{dateString} • {timeString}</span>
                         </div>
                         {item.city && (
                             <div className="flex items-center gap-2">
-                                <MapPin size={14} />
+                                <MapPin size={14} className="text-lime-dark" />
                                 <span>{item.city}{item.area ? `, ${item.area}` : ''}</span>
                             </div>
                         )}
@@ -55,11 +53,11 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                             "{item.outcomeSummary}"
                         </div>
                     )}
-                </div>
+                </CardContent>
 
                 {/* Footer */}
-                <div className="mt-4 pt-4 border-t border-border/40 flex items-center justify-between">
-                    <span className="text-xs font-medium text-lime-dark flex items-center gap-1">
+                <CardFooter className="pt-0 flex items-center justify-between border-t border-border/30 mt-auto p-4 bg-zinc-50/50 rounded-b-2xl">
+                    <span className="text-xs font-semibold text-lime-dark flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                         {item.type === 'challenge' ? 'Join Challenge' : 'View Event'}
                         <ArrowRight size={12} />
                     </span>
@@ -67,13 +65,13 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                     {item.badgesAwarded && item.badgesAwarded.length > 0 && (
                         <div className="flex -space-x-1">
                             {item.badgesAwarded.map(badge => (
-                                <div key={badge.id} className="w-5 h-5 rounded-full bg-zinc-100 border border-white flex items-center justify-center text-[10px]">
+                                <div key={badge.id} className="w-5 h-5 rounded-full bg-white border border-zinc-100 shadow-sm flex items-center justify-center text-[10px]">
                                     🏆
                                 </div>
                             ))}
                         </div>
                     )}
-                </div>
+                </CardFooter>
             </Card>
         </Link>
     );

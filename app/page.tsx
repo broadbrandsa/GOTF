@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { CITIES } from '@/lib/data';
 import { MapPin } from 'lucide-react';
 
@@ -59,7 +59,7 @@ export default function LocationGate() {
           </div>
 
           <Button
-            fullWidth
+            className="w-full"
             onClick={handleContinue}
             disabled={loading}
           >

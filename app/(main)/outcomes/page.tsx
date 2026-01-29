@@ -3,6 +3,7 @@
 import { TopBar } from '@/components/TopBar';
 import { OutcomeCard } from '@/components/OutcomeCard';
 import { PARTICIPATION_ITEMS } from '@/lib/data';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 export default function OutcomesPage() {
     // Filter: Closed items with outcomes
@@ -18,23 +19,28 @@ export default function OutcomesPage() {
                     What your actions make possible.
                 </p>
 
-                {/* Visual Toggle Tabs */}
-                <div className="grid grid-cols-2 p-1 bg-zinc-100 rounded-full">
-                    <button className="py-2 text-sm font-medium text-muted rounded-full">Discover</button>
-                    <button className="py-2 text-sm font-semibold text-foreground bg-white shadow-sm rounded-full">Outcomes</button>
-                </div>
-            </div>
+                <Tabs defaultValue="outcomes" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2 rounded-full p-1 bg-zinc-100 h-11">
+                        <TabsTrigger value="discover" className="rounded-full text-xs uppercase tracking-wide">Discover</TabsTrigger>
+                        <TabsTrigger value="outcomes" className="rounded-full text-xs uppercase tracking-wide">Outcomes</TabsTrigger>
+                    </TabsList>
 
-            <div className="px-6 space-y-4">
-                {outcomes.length > 0 ? (
-                    outcomes.map(item => (
-                        <OutcomeCard key={item.id} item={item} />
-                    ))
-                ) : (
-                    <div className="text-center py-10 text-muted">
-                        <p>No outcomes reported yet.</p>
-                    </div>
-                )}
+                    <TabsContent value="outcomes" className="mt-6 space-y-4">
+                        {outcomes.length > 0 ? (
+                            outcomes.map(item => (
+                                <OutcomeCard key={item.id} item={item} />
+                            ))
+                        ) : (
+                            <div className="text-center py-10 text-muted-foreground">
+                                <p>No outcomes reported yet.</p>
+                            </div>
+                        )}
+                    </TabsContent>
+
+                    <TabsContent value="discover" className="mt-8 text-center text-muted-foreground">
+                        <p>Check back later for discovery features.</p>
+                    </TabsContent>
+                </Tabs>
             </div>
         </div>
     );

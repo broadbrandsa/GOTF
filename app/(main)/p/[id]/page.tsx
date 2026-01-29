@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { PARTICIPATION_ITEMS } from '@/lib/data';
 import { TopBar } from '@/components/TopBar';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Calendar, MapPin, CheckCircle, Info, Clock, Users } from 'lucide-react';
 
 interface PageProps {
@@ -22,10 +22,27 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
     const isWebinar = item.type === 'webinar';
     const isChallenge = item.type === 'challenge';
 
+    // Hero Image Logic
+    let heroImage = '/images/event-local-action-1.jpg'; // Default fallback
+    if (item.category === 'Citizen Science') heroImage = '/images/challenge-citizen-science.jpg';
+    if (item.category === 'Learning' || item.type === 'webinar') heroImage = '/images/event-learning.jpg';
+    if (item.title.toLowerCase().includes('water') || item.title.toLowerCase().includes('beach')) heroImage = '/images/event-water.jpg';
+
     return (
         <div className="pb-24">
             {/* Top Bar with back mostly handled by browser or simple back, but standardized TopBar is ok */}
             <TopBar title="" subtitle={item.category} showProfile={false} />
+
+            {/* Hero Image */}
+            <div className="px-6 mt-2 mb-4">
+                <div className="w-full h-48 sm:h-56 relative rounded-2xl overflow-hidden shadow-sm">
+                    <img
+                        src={heroImage}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            </div>
 
             <div className="px-6 space-y-6">
 
@@ -71,14 +88,27 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
 
                 {/* Outcome if Closed */}
                 {isClosed && item.outcomeSummary && (
-                    <Card className="bg-lime/10 border-lime/30">
-                        <h3 className="font-bold text-lime-dark mb-2 flex items-center gap-2">
-                            <CheckCircle size={18} /> Outcome Reported
-                        </h3>
-                        <p className="text-foreground leading-relaxed">
-                            {item.outcomeSummary}
-                        </p>
-                    </Card>
+                    <div className="space-y-4">
+                        {item.outcomeImage && (
+                            <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm">
+                                <img
+                                    src={item.outcomeImage}
+                                    alt="Outcome result"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        )}
+                        <Card className="bg-lime/10 border-lime/30">
+                            <div className="p-6">
+                                <h3 className="font-bold text-lime-dark mb-2 flex items-center gap-2">
+                                    <CheckCircle size={18} /> Outcome Reported
+                                </h3>
+                                <p className="text-foreground leading-relaxed">
+                                    {item.outcomeSummary}
+                                </p>
+                            </div>
+                        </Card>
+                    </div>
                 )}
 
                 {/* Main Content */}
@@ -110,7 +140,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
 
                 {/* Sticky Footer CTA */}
                 <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md p-4 border-t border-border mx-auto max-w-md z-50 pb-8">
-                    <Button fullWidth disabled={isClosed} className={isClosed ? 'bg-zinc-100 text-muted' : ''}>
+                    <Button className={isClosed ? 'bg-zinc-100 text-muted w-full' : 'w-full'} disabled={isClosed}>
                         {isClosed ? 'Participation Closed' : 'Join Now'}
                     </Button>
                 </div>

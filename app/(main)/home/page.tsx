@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ParticipationCard } from '@/components/ParticipationCard';
 import { TopBar } from '@/components/TopBar';
-import { Badge } from '@/components/ui/Badge';
+import { Badge } from '@/components/ui/badge';
 import { PARTICIPATION_ITEMS } from '@/lib/data';
 import { Participation } from '@/lib/types';
 import { MapPin } from 'lucide-react';

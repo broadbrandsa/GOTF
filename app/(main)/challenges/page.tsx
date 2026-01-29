@@ -2,14 +2,22 @@
 
 import { ParticipationCard } from '@/components/ParticipationCard';
 import { TopBar } from '@/components/TopBar';
-import { PARTICIPATION_ITEMS } from '@/lib/data';
+import { PARTICIPATION_ITEMS, CITIES } from '@/lib/data';
 import { ChevronDown } from 'lucide-react';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export default function ChallengesPage() {
-    // Filter: Challenges
     const challenges = PARTICIPATION_ITEMS
         .filter(item => item.type === 'challenge')
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+    const categories = ['All Categories', 'Citizen Science', 'Local Action', 'Learning'];
 
     return (
         <div className="pb-6">
@@ -21,15 +29,29 @@ export default function ChallengesPage() {
                 </p>
 
                 <div className="flex gap-3 overflow-x-auto pb-1 -mx-6 px-6 scrollbar-hide">
-                    {/* Visual Filters */}
-                    <div className="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full text-sm font-medium shadow-sm whitespace-nowrap">
-                        <span>All Categories</span>
-                        <ChevronDown size={14} className="text-muted" />
-                    </div>
-                    <div className="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full text-sm font-medium shadow-sm whitespace-nowrap">
-                        <span>Cape Town</span>
-                        <ChevronDown size={14} className="text-muted" />
-                    </div>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium border-border bg-white shadow-sm hover:bg-zinc-50 whitespace-nowrap gap-2">
+                                All Categories
+                                <ChevronDown size={14} className="text-muted-foreground" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start">
+                            {categories.map(c => <DropdownMenuItem key={c}>{c}</DropdownMenuItem>)}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium border-border bg-white shadow-sm hover:bg-zinc-50 whitespace-nowrap gap-2">
+                                Cape Town
+                                <ChevronDown size={14} className="text-muted-foreground" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start">
+                            {CITIES.map(c => <DropdownMenuItem key={c}>{c}</DropdownMenuItem>)}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             </div>
 
