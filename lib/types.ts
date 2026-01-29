@@ -10,6 +10,8 @@ export interface Badge {
   icon: string; // Lucide icon name or placeholder
 }
 
+export type BadgeName = 'Eco-Warrior' | 'Learner' | 'Connector' | 'Steward' | 'Guardian' | 'Local Hero' | 'Innovator' | 'Influence';
+
 export interface Participation {
   id: string;
   type: ParticipationType;
@@ -27,10 +29,13 @@ export interface Participation {
   whatYouDo: string[];
   tags: string[];
   badgesAwarded?: Badge[];
+  earnedBadgeName?: BadgeName; // Specific named badge
   outcomeSummary?: string; // Only for closed items
   outcomeImage?: string; // New field for outcome image
   researchPartner?: string; // For Citizen Science challenges
   imageUrl?: string; // For visual demo
+  joinedMemberIds?: string[];     // IDs of members who joined (for open)
+  contributedMemberIds?: string[]; // IDs of members who contributed (for closed)
 }
 
 export interface Member {

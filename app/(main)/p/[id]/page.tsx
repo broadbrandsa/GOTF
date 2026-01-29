@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { PARTICIPATION_ITEMS } from '@/lib/data';
+import { PARTICIPATION_ITEMS, MEMBERS } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Calendar, MapPin, CheckCircle, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -75,10 +75,10 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                             )}
 
                             {/* Gamification Pill */}
-                            {(item.badgesAwarded?.length || 0) > 0 && (
+                            {item.earnedBadgeName && (
                                 <div className="inline-flex items-center px-2.5 h-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white shadow-sm">
                                     <span className="mr-1 text-sm">🏆</span>
-                                    Earn {item.badgesAwarded?.length} badge{item.badgesAwarded!.length > 1 ? 's' : ''}
+                                    Earn {item.badgesAwarded?.length && item.badgesAwarded.length > 1 ? `${item.badgesAwarded.length} badges` : `a ${item.earnedBadgeName} badge`}
                                 </div>
                             )}
                         </div>
@@ -137,6 +137,29 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                     </Button>
                 )}
 
+                {/* Members Joined (Open) */}
+                {!isClosed && item.joinedMemberIds && item.joinedMemberIds.length > 0 && (
+                    <div className="space-y-3 pt-2">
+                        <p className="text-sm font-medium text-zinc-600">
+                            {item.joinedMemberIds.length} members have joined this {item.type === 'challenge' ? 'Challenge' : 'Event'}.
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            {item.joinedMemberIds.map(mid => {
+                                const member = MEMBERS.find(m => m.id === mid);
+                                if (!member) return null;
+                                return (
+                                    <div key={mid} className="flex items-center gap-2 pl-1 pr-3 py-1 bg-zinc-50 border border-zinc-100 rounded-full shadow-sm hover:border-lime/30 transition-colors">
+                                        <div className="w-5 h-5 rounded-full overflow-hidden bg-zinc-200">
+                                            <img src={member.avatarImage || '/images/profile-icon.jpg'} alt={member.name} className="w-full h-full object-cover" />
+                                        </div>
+                                        <span className="text-xs font-semibold text-zinc-700">{member.name}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
                 {/* Outcome if Closed */}
                 {isClosed && item.outcomeSummary && (
                     <div className="space-y-4">
@@ -159,6 +182,29 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                                 />
                             </div>
                         )}
+                    </div>
+                )}
+
+                {/* Members Contributed (Closed) */}
+                {isClosed && item.contributedMemberIds && item.contributedMemberIds.length > 0 && (
+                    <div className="space-y-3 pt-2">
+                        <p className="text-sm font-medium text-zinc-600">
+                            {item.contributedMemberIds.length} members contributed to this {item.type === 'challenge' ? 'Challenge' : 'Event'}.
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            {item.contributedMemberIds.map(mid => {
+                                const member = MEMBERS.find(m => m.id === mid);
+                                if (!member) return null;
+                                return (
+                                    <div key={mid} className="flex items-center gap-2 pl-1 pr-3 py-1 bg-zinc-50 border border-zinc-100 rounded-full shadow-sm hover:border-lime/30 transition-colors">
+                                        <div className="w-5 h-5 rounded-full overflow-hidden bg-zinc-200">
+                                            <img src={member.avatarImage || '/images/profile-icon.jpg'} alt={member.name} className="w-full h-full object-cover" />
+                                        </div>
+                                        <span className="text-xs font-semibold text-zinc-700">{member.name}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 )}
 

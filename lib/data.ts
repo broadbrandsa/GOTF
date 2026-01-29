@@ -47,7 +47,9 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Meet at Surfer’s Corner', 'Collect bags and gloves', 'Clean the beach for 2 hours', 'Sort waste for recycling'],
         tags: ['Family Friendly', 'Outdoors'],
         badgesAwarded: [BADGES[1]],
-        imageUrl: '/images/event-local-action-1.jpg'
+        earnedBadgeName: 'Eco-Warrior',
+        imageUrl: '/images/event-local-action-1.jpg',
+        joinedMemberIds: ['m1', 'm2', 'm4']
     },
     {
         id: 'p2',
@@ -63,7 +65,9 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Refuse straws and bags', 'Use reusable cups', 'Buy loose vegetables', 'Log your success daily'],
         tags: ['Remote', 'Action'],
         badgesAwarded: [BADGES[1]],
-        imageUrl: '/images/event-water.jpg'
+        earnedBadgeName: 'Innovator',
+        imageUrl: '/images/event-water.jpg',
+        joinedMemberIds: ['m3', 'm5']
     },
     {
         id: 'p3',
@@ -80,7 +84,9 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Register for Zoom link', 'Prepare questions', 'Join the live session'],
         tags: ['Online', 'Beginner'],
         badgesAwarded: [BADGES[2]],
-        imageUrl: '/images/event-learning.jpg'
+        earnedBadgeName: 'Learner',
+        imageUrl: '/images/event-learning.jpg',
+        joinedMemberIds: ['m1', 'm2', 'm3', 'm4', 'm5']
     },
     {
         id: 'p4',
@@ -97,9 +103,11 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Hike to location', 'Clear Port Jackson willow', 'Stack for chipping'],
         tags: ['Physical', 'Nature'],
         badgesAwarded: [BADGES[1]],
+        earnedBadgeName: 'Guardian',
         outcomeSummary: 'We cleared 2 hectares of alien vegetation, saving an estimated 10,000 liters of water per year for the catchment area.',
         outcomeImage: '/images/outcome-1.jpg',
-        imageUrl: '/images/event-local-action-2.jpg'
+        imageUrl: '/images/event-local-action-2.jpg',
+        contributedMemberIds: ['m2', 'm4', 'm1']
     },
     {
         id: 'p5',
@@ -116,8 +124,10 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Download the app', 'Listen for calls', 'Upload photos and location'],
         tags: ['Night', 'Nature', 'Citizen Science'],
         badgesAwarded: [BADGES[6]],
+        earnedBadgeName: 'Local Hero',
         researchPartner: 'Western Leopard Toad Conservation Committee',
-        imageUrl: '/images/challenge-citizen-science.jpg'
+        imageUrl: '/images/challenge-citizen-science.jpg',
+        joinedMemberIds: ['m4', 'm5']
     },
     {
         id: 'p7',
@@ -134,8 +144,10 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Bring camera or binoculars', 'Identify species', 'Submit counts via app'],
         tags: ['Daytime', 'Coastal', 'Citizen Science'],
         badgesAwarded: [BADGES[2]],
+        earnedBadgeName: 'Eco-Warrior',
         researchPartner: 'BirdLife South Africa',
-        imageUrl: '/images/challenge-citizen-science.jpg'
+        imageUrl: '/images/challenge-citizen-science.jpg',
+        joinedMemberIds: ['m1']
     },
     {
         id: 'p8',
@@ -152,8 +164,10 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Observe from boardwalks', 'Count individuals in designated zones', 'Record behavior notes'],
         tags: ['Wildlife', 'Count-based', 'Citizen Science'],
         badgesAwarded: [BADGES[5]],
+        earnedBadgeName: 'Guardian',
         researchPartner: 'SANCCOB',
-        imageUrl: '/images/event-water.jpg' // Reusing water image for marine topic
+        imageUrl: '/images/event-water.jpg', // Reusing water image for marine topic
+        joinedMemberIds: ['m1', 'm2', 'm3']
     },
     {
         id: 'p6',
@@ -169,7 +183,9 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Prep vegetables', 'Cook immense pots', 'Serve meals', 'Clean up'],
         tags: ['Service', 'Community'],
         badgesAwarded: [BADGES[0]],
-        imageUrl: '/images/event-local-action-2.jpg'
+        earnedBadgeName: 'Local Hero',
+        imageUrl: '/images/event-local-action-2.jpg',
+        joinedMemberIds: ['m3']
     },
     // Discover Items (Learning)
     {
@@ -187,7 +203,9 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Watch the stream', 'Q&A with ecologist'],
         tags: ['Online', 'Learning'],
         badgesAwarded: [BADGES[2]],
-        imageUrl: '/images/event-learning.jpg'
+        earnedBadgeName: 'Learner',
+        imageUrl: '/images/event-learning.jpg',
+        joinedMemberIds: ['m1', 'm2', 'm5']
     },
     {
         id: 'p10',
@@ -204,7 +222,9 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Attend talk', 'Walk the canal'],
         tags: ['In-person', 'Learning'],
         badgesAwarded: [BADGES[2]],
-        imageUrl: '/images/event-water.jpg'
+        earnedBadgeName: 'Learner',
+        imageUrl: '/images/event-water.jpg',
+        joinedMemberIds: ['m4']
     },
     // Closed Outcomes
     {
@@ -222,9 +242,11 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Collect litter', 'Categorize brands', 'Weigh and report'],
         tags: ['Cleanup', 'Data'],
         badgesAwarded: [BADGES[1]],
+        earnedBadgeName: 'Steward',
         outcomeSummary: 'We collected 45kg of waste, 60% of which was single-use food packaging. Data submitted to city council.',
         outcomeImage: '/images/outcome-1.jpg',
-        imageUrl: '/images/event-local-action-1.jpg'
+        imageUrl: '/images/event-local-action-1.jpg',
+        contributedMemberIds: ['m1', 'm2', 'm3', 'm4', 'm5']
     },
     {
         id: 'p12',
@@ -241,8 +263,10 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         whatYouDo: ['Patrol designated zones', 'Remove hardware', 'Log GPS coords'],
         tags: ['Conservation', 'Active'],
         badgesAwarded: [BADGES[1]],
+        earnedBadgeName: 'Guardian',
         outcomeSummary: 'Removed 12 active snares from the upper trail loops, preventing harm to local porcupines and caracals.',
         outcomeImage: '/images/outcome-2.jpg',
-        imageUrl: '/images/event-local-action-2.jpg'
+        imageUrl: '/images/event-local-action-2.jpg',
+        contributedMemberIds: ['m4']
     },
 ];
