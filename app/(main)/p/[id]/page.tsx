@@ -84,6 +84,14 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                             <span className="text-lime-dark font-medium">Earn {item.badgesAwarded[0].name} Badge</span>
                         </div>
                     )}
+
+                    {/* Research Partner */}
+                    {item.researchPartner && (
+                        <div className="flex items-center gap-3 pt-1">
+                            <div className="shrink-0 w-[18px] flex justify-center text-zinc-400">🔬</div>
+                            <span className="text-muted-foreground">Partner: <span className="font-medium text-foreground">{item.researchPartner}</span></span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Outcome if Closed */}
@@ -140,9 +148,16 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
 
                 {/* Sticky Footer CTA */}
                 <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md p-4 border-t border-border mx-auto max-w-md z-50 pb-8">
-                    <Button className={isClosed ? 'bg-zinc-100 text-muted w-full' : 'w-full'} disabled={isClosed}>
-                        {isClosed ? 'Participation Closed' : 'Join Now'}
-                    </Button>
+                    <div className="flex gap-3">
+                        {item.type === 'event' && item.status === 'open' && (
+                            <Button variant="outline" className="flex-1 border-lime-dark text-lime-dark hover:bg-lime/10">
+                                Register
+                            </Button>
+                        )}
+                        <Button className={`flex-1 ${isClosed ? 'bg-zinc-100 text-muted' : ''}`} disabled={isClosed}>
+                            {isClosed ? 'Participation Closed' : 'Join Now'}
+                        </Button>
+                    </div>
                 </div>
 
             </div>

@@ -34,8 +34,8 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                     </CardTitle>
                 </CardHeader>
 
-                <CardContent className="flex-1 pb-4">
-                    <div className="space-y-2 text-sm text-muted-foreground">
+                <CardContent className={`flex-1 pb-4 ${item.type === 'challenge' ? 'flex flex-row gap-4' : ''}`}>
+                    <div className="flex-1 space-y-2 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
                             <Calendar size={14} className="text-lime-dark" />
                             <span>{dateString} • {timeString}</span>
@@ -46,11 +46,17 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                                 <span>{item.city}{item.area ? `, ${item.area}` : ''}</span>
                             </div>
                         )}
+
+                        {isClosed && item.outcomeSummary && (
+                            <div className="mt-4 p-3 bg-zinc-50 rounded-xl text-xs text-zinc-600 italic border border-zinc-100">
+                                "{item.outcomeSummary}"
+                            </div>
+                        )}
                     </div>
 
-                    {isClosed && item.outcomeSummary && (
-                        <div className="mt-4 p-3 bg-zinc-50 rounded-xl text-xs text-zinc-600 italic border border-zinc-100">
-                            "{item.outcomeSummary}"
+                    {item.type === 'challenge' && (
+                        <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0">
+                            <img src={item.category === 'Citizen Science' ? '/images/challenge-citizen-science.jpg' : '/images/event-local-action-1.jpg'} alt={item.title} className="w-full h-full object-cover" />
                         </div>
                     )}
                 </CardContent>
@@ -61,16 +67,7 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                         {item.type === 'challenge' ? 'Join Challenge' : 'View Event'}
                         <ArrowRight size={12} />
                     </span>
-                    {/* Visual indicator of badges */}
-                    {item.badgesAwarded && item.badgesAwarded.length > 0 && (
-                        <div className="flex -space-x-1">
-                            {item.badgesAwarded.map(badge => (
-                                <div key={badge.id} className="w-5 h-5 rounded-full bg-white border border-zinc-100 shadow-sm flex items-center justify-center text-[10px]">
-                                    🏆
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    {/* Visual indicator of badges removed per request */}
                 </CardFooter>
             </Card>
         </Link>

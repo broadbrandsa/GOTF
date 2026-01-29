@@ -12,18 +12,11 @@ export function BottomNav() {
         { href: '/home', label: 'Home', icon: Home },
         { href: '/events', label: 'Events', icon: Calendar },
         { href: '/challenges', label: 'Challenges', icon: Trophy },
-        { href: '/quest', label: 'Quest', icon: Map },
         { href: '/community', label: 'Community', icon: Users },
-        // { href: '/outcomes', label: 'Outcomes', icon: Star }, // Outcomes might be too many for bottom nav? User listed 6 items. 
-        // "BottomNav (Home, Events, Challenges, Quest, Community, Outcomes)" from prompt.
-        // 6 items is a lot for mobile. But I will do it.
-    ];
-
-    // Adding Outcomes
-    const allItems = [
-        ...navItems,
         { href: '/outcomes', label: 'Outcomes', icon: Star }
     ];
+
+    const allItems = navItems;
 
     return (
         <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-white/90 backdrop-blur-md pb-safe">
@@ -32,16 +25,29 @@ export function BottomNav() {
                     const isActive = pathname.startsWith(item.href);
                     const Icon = item.icon;
 
+                    // Simple color logic
+                    let activeColorClass = "text-foreground";
+                    if (isActive) {
+                        if (item.label === 'Events') activeColorClass = "text-lime-dark";
+                        else if (item.label === 'Challenges') activeColorClass = "text-sky-600";
+                        else if (item.label === 'Community') activeColorClass = "text-orange-500";
+                        else if (item.label === 'Outcomes') activeColorClass = "text-teal-600";
+                        else activeColorClass = "text-lime-dark"; // Home default
+                    }
+
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
                             className={clsx(
-                                "flex flex-col items-center justify-center w-full h-full space-y-1",
-                                isActive ? "text-foreground" : "text-muted hover:text-foreground/80"
+                                "flex flex-col items-center justify-center w-full h-full space-y-1 relative",
+                                isActive ? activeColorClass : "text-muted hover:text-foreground/80"
                             )}
                         >
-                            <Icon size={20} className={isActive ? "stroke-[2.5px]" : "stroke-2"} />
+                            <div className="relative">
+                                <Icon size={20} className={isActive ? "stroke-[2.5px]" : "stroke-2"} />
+                                {isActive && <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-current" />}
+                            </div>
                             <span className="text-[10px] font-medium leading-none">{item.label}</span>
                         </Link>
                     );

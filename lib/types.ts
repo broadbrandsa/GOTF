@@ -27,6 +27,7 @@ export interface Participation {
   badgesAwarded?: Badge[];
   outcomeSummary?: string; // Only for closed items
   outcomeImage?: string; // New field for outcome image
+  researchPartner?: string; // For Citizen Science challenges
   imageUrl?: string; // For visual demo
 }
 

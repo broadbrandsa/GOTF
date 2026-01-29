@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 export default function EventsPage() {
     // Filter: Events + Webinars
     const events = PARTICIPATION_ITEMS
-        .filter(item => item.type === 'event' || item.type === 'webinar')
+        .filter(item => (item.type === 'event' || item.type === 'webinar') && item.status === 'open')
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     return (

@@ -6,7 +6,8 @@ import { TopBar } from '@/components/TopBar';
 import { Badge } from '@/components/ui/badge';
 import { PARTICIPATION_ITEMS } from '@/lib/data';
 import { Participation } from '@/lib/types';
-import { MapPin } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HomePage() {
     const [city, setCity] = useState<string>('Cape Town'); // Default fallback
@@ -44,6 +45,13 @@ export default function HomePage() {
     return (
         <div className="pb-6">
             <TopBar title="Hello, Guardian" subtitle="Welcome back" />
+
+            <div className="px-6 mt-4">
+                <Link href="/quest" className="inline-flex items-center gap-2 px-3 py-1.5 bg-lime/10 text-lime-dark rounded-full text-xs font-medium hover:bg-lime/20 transition-colors">
+                    <span>3 badges to reach Steward</span>
+                    <ArrowRight size={12} />
+                </Link>
+            </div>
 
             <div className="px-6 mt-2 mb-6">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 text-xs font-medium text-muted-foreground border border-zinc-200">
