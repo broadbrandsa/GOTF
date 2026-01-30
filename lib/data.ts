@@ -269,4 +269,46 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         imageUrl: '/images/Tokai Trail.jpg',
         contributedMemberIds: ['m4']
     },
+    {
+        id: 'p13',
+        type: 'challenge',
+        title: 'False Bay Kelp Mapping',
+        category: 'Citizen Science',
+        mode: 'in_person',
+        status: 'closed',
+        city: 'Cape Town',
+        area: 'False Bay',
+        date: '2026-01-05T08:00:00Z',
+        goal: 'Map kelp forest density via drone imagery analysis.',
+        whyItMatters: 'Kelp forests are vital carbon sinks and nurseries for marine life.',
+        whatYouDo: ['Analyze drone footage', 'Tag density zones', 'Submit report'],
+        tags: ['Remote', 'Data'],
+        badgesAwarded: [BADGES[2]],
+        earnedBadgeName: 'Learner',
+        outcomeSummary: 'Mapped 15km of coastline. Data shows a 10% increase in kelp density compared to 2024.',
+        outcomeImage: '/images/outcome-1.jpg', // Reusing
+        imageUrl: '/images/event-water.jpg',
+        contributedMemberIds: ['m4', 'm1']
+    },
+    {
+        id: 'p14',
+        type: 'webinar',
+        title: 'Sustainable Seafood Workshop',
+        category: 'Learning',
+        mode: 'online',
+        status: 'closed',
+        city: 'Cape Town',
+        date: '2025-12-15T18:00:00Z',
+        platform: 'Zoom',
+        goal: 'Learn how to choose sustainable seafood options.',
+        whyItMatters: 'Overfishing threatens global fish stocks.',
+        whatYouDo: ['Attend workshop', 'Download SASSI app'],
+        tags: ['Online', 'Learning'],
+        badgesAwarded: [BADGES[2]],
+        earnedBadgeName: 'Connector',
+        outcomeSummary: '200 participants pledged to check SASSI list before ordering seafood.',
+        outcomeImage: '/images/outcome-1.jpg', // Reusing
+        imageUrl: '/images/event-learning.jpg',
+        contributedMemberIds: ['m4', 'm2']
+    },
 ];

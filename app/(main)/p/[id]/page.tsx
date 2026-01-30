@@ -45,7 +45,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
 
                 {/* Back Button (Absolute Top Left) */}
                 <div className="absolute top-4 left-6 z-20">
-                    <Link href={item.type === 'challenge' ? '/challenges' : '/events'} className="flex items-center justify-center w-8 h-8 rounded-full bg-black/20 backdrop-blur-md text-white hover:bg-black/40 transition-colors">
+                    <Link href={item.category === 'Learning' ? '/discover' : '/events'} className="flex items-center justify-center w-8 h-8 rounded-full bg-black/20 backdrop-blur-md text-white hover:bg-black/40 transition-colors">
                         <ArrowLeft size={16} />
                     </Link>
                 </div>
@@ -59,7 +59,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                         <div className="flex flex-wrap items-center gap-2 mb-3">
                             {/* Type Pill */}
                             <Badge variant="secondary" className="bg-white/90 backdrop-blur-md text-black hover:bg-white border-white/20 capitalize font-medium shadow-sm px-2.5 py-0.5 h-6">
-                                {item.type}
+                                {item.type === 'challenge' ? 'Research' : item.type}
                             </Badge>
 
                             {/* Status Pill */}
@@ -132,7 +132,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                 {/* CTA Button */}
                 {!isClosed && (
                     <Button className="w-full rounded-full h-12 text-base font-bold bg-lime text-zinc-900 hover:bg-lime-400 shadow-sm transition-all active:scale-[0.99] border border-lime-400/50">
-                        {item.type === 'challenge' ? 'Join Challenge' : 'Join Event'}
+                        {item.type === 'challenge' ? 'Join Research' : 'Join Event'}
                         <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                 )}
@@ -141,7 +141,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                 {!isClosed && item.joinedMemberIds && item.joinedMemberIds.length > 0 && (
                     <div className="space-y-3 pt-2">
                         <p className="text-sm font-medium text-zinc-600">
-                            {item.joinedMemberIds.length} members have joined this {item.type === 'challenge' ? 'Challenge' : 'Event'}.
+                            {item.joinedMemberIds.length} members have joined this {item.type === 'challenge' ? 'Research' : 'Event'}.
                         </p>
                         <div className="flex flex-wrap gap-2">
                             {item.joinedMemberIds.map(mid => {
@@ -189,7 +189,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                 {isClosed && item.contributedMemberIds && item.contributedMemberIds.length > 0 && (
                     <div className="space-y-3 pt-2">
                         <p className="text-sm font-medium text-zinc-600">
-                            {item.contributedMemberIds.length} members contributed to this {item.type === 'challenge' ? 'Challenge' : 'Event'}.
+                            {item.contributedMemberIds.length} members contributed to this {item.type === 'challenge' ? 'Research' : 'Event'}.
                         </p>
                         <div className="flex flex-wrap gap-2">
                             {item.contributedMemberIds.map(mid => {

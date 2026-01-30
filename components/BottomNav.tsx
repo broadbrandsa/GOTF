@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, Trophy, Map, Users, Star } from 'lucide-react'; // Using icons roughly mapping to the needs
+import { Home, Calendar, Trophy, Map, Users, Star, Lightbulb } from 'lucide-react'; // Using icons roughly mapping to the needs
 import { clsx } from 'clsx';
 
 export function BottomNav() {
@@ -10,8 +10,8 @@ export function BottomNav() {
 
     const navItems = [
         { href: '/home', label: 'Home', icon: Home },
-        { href: '/events', label: 'Events', icon: Calendar },
-        { href: '/challenges', label: 'Challenges', icon: Trophy },
+        { href: '/events', label: 'Participate', icon: Calendar },
+        { href: '/discover', label: 'Discover', icon: Lightbulb },
         { href: '/community', label: 'Community', icon: Users },
         { href: '/outcomes', label: 'Outcomes', icon: Star }
     ];
@@ -28,8 +28,8 @@ export function BottomNav() {
                     // Active Circle Color Logic
                     let activeBgClass = "bg-zinc-100";
                     if (isActive) {
-                        if (item.label === 'Events') activeBgClass = "bg-[#d9f99d]"; // Lime-200ish
-                        else if (item.label === 'Challenges') activeBgClass = "bg-sky-200";
+                        if (item.label === 'Participate') activeBgClass = "bg-[#d9f99d]"; // Lime-200ish
+                        else if (item.label === 'Discover') activeBgClass = "bg-sky-200";
                         else if (item.label === 'Community') activeBgClass = "bg-orange-200";
                         else if (item.label === 'Outcomes') activeBgClass = "bg-teal-200";
                         else activeBgClass = "bg-[#d9f99d]"; // Home default (Lime)

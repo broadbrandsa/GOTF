@@ -35,7 +35,7 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                                         item.category === 'Learning' ? "bg-amber-100 text-amber-700 hover:bg-amber-100" :
                                             "bg-lime/20 text-lime-dark hover:bg-lime/20"
                                 )}>
-                                    {item.type}
+                                    {item.type === 'challenge' ? 'Research' : item.type}
                                 </Badge>
 
                                 {/* Status Pill (Only for Open items) */}

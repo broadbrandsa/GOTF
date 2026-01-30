@@ -2,8 +2,10 @@
 
 import { TopBar } from '@/components/TopBar';
 import { Card } from '@/components/ui/card';
-import { BADGES, MOCK_USER_BADGES } from '@/lib/data';
+import { BADGES, MOCK_USER_BADGES, PARTICIPATION_ITEMS } from '@/lib/data';
 import { BadgeIcon } from '@/components/BadgeIcon';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function QuestPage() {
     const earnedCount = MOCK_USER_BADGES.length;
@@ -45,6 +47,38 @@ export default function QuestPage() {
                     ))}
                 </div>
             </div>
+            {/* Past Contributions Slider */}
+            <div className="px-6 mt-8 mb-8">
+                <h3 className="font-bold text-lg mb-4 text-foreground">Your past contributions</h3>
+                <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-2 px-2">
+                    {PARTICIPATION_ITEMS.filter(item => item.status === 'closed').slice(0, 4).map(item => (
+                        <div key={item.id} className="snap-center shrink-0 w-[40vw] sm:w-[160px] flex-none">
+                            <div className="h-[200px] rounded-2xl bg-white border border-zinc-100 shadow-sm p-4 flex flex-col justify-between">
+                                <div>
+                                    <div className="text-[10px] font-bold uppercase tracking-wide text-zinc-400 mb-2">
+                                        {item.type === 'challenge' ? 'Research' : item.type}
+                                    </div>
+                                    <h4 className="font-bold text-sm leading-snug line-clamp-3 mb-3 text-zinc-800">
+                                        {item.title}
+                                    </h4>
+
+                                    {item.earnedBadgeName && (
+                                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-lime/10 border border-lime/20">
+                                            <span className="text-xs">🏆</span>
+                                            <span className="text-[10px] font-bold text-lime-dark">{item.earnedBadgeName}</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <Link href={`/p/${item.id}`} className="text-xs font-semibold text-lime-dark hover:underline flex items-center mt-2">
+                                    See the outcome <ArrowRight size={12} className="ml-1" />
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
         </div>
     );
 }
