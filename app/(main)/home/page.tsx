@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { ParticipationCard } from '@/components/ParticipationCard';
 import { TopBar } from '@/components/TopBar';
 import { Badge } from '@/components/ui/badge';
+import { clsx } from 'clsx';
 import { PARTICIPATION_ITEMS } from '@/lib/data';
 import { Participation } from '@/lib/types';
 import { MapPin, ArrowRight } from 'lucide-react';
@@ -44,7 +45,12 @@ export default function HomePage() {
 
     return (
         <div className="pb-6">
-            <TopBar title="Hello, Guardian" subtitle="Welcome back" />
+            <TopBar title="Hello, Guardian" subtitle="Welcome back">
+                <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">{city}</span>
+                    <span className="text-xs text-muted-foreground underline opacity-60 hover:opacity-100 cursor-pointer transition-opacity">change location</span>
+                </div>
+            </TopBar>
 
             <div className="px-6 mt-4">
                 <Link href="/quest" className="block w-full max-w-sm">
@@ -66,49 +72,55 @@ export default function HomePage() {
                 </Link>
             </div>
 
-            <div className="px-6 mt-2 mb-6">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 text-xs font-medium text-muted-foreground border border-zinc-200">
-                    <MapPin size={12} />
-                    Your location: <span className="text-foreground font-semibold">{city}</span>
-                </div>
-            </div>
-
             {/* "Your Upcoming" Section */}
-            <div className="px-6 mb-8 mt-4">
-                <h2 className="text-lg font-bold text-foreground mb-4">Your Upcoming</h2>
-                {/* Horizontal Scroll / or Single Hero Card */}
-                {/* Request: "Add ONE featured block/card that looks like a hero card ... width: 40vw ... height: 50vh" */}
-                {/* For a single item, we just render it. Let's pick a mock item. */}
-                {/* Let's use 'p1' (Beach Cleanup) or similar as a Featured Item since we don't have auth/user logic */}
-                {(() => {
-                    const featuredItem = PARTICIPATION_ITEMS.find(p => p.id === 'p1') || PARTICIPATION_ITEMS[0];
-                    return (
-                        <Link href={`/p/${featuredItem.id}`} className="block relative h-[50vh] w-[70vw] sm:w-[50vw] max-w-sm rounded-2xl overflow-hidden shadow-md group">
+            <div className="mb-8 mt-6">
+                <div className="px-6 mb-4">
+                    <h2 className="text-lg font-bold text-foreground">Your Upcoming</h2>
+                </div>
+
+                {/* Horizontal Slider */}
+                <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide px-6 -mx-0">
+                    {PARTICIPATION_ITEMS.slice(0, 5).map(item => (
+                        <Link key={item.id} href={`/p/${item.id}`} className="snap-center shrink-0 block relative h-[50vh] w-[80vw] sm:w-[45vw] max-w-sm rounded-2xl overflow-hidden shadow-md group active:scale-[0.99] transition-transform">
                             <img
-                                src={featuredItem.imageUrl || '/images/event-local-action-1.jpg'}
-                                alt={featuredItem.title}
+                                src={item.imageUrl || '/images/event-local-action-1.jpg'}
+                                alt={item.title}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                             {/* Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5">
-                                <div className="absolute top-4 left-4">
-                                    <div className="bg-white/90 backdrop-blur-md text-black px-2.5 py-1 rounded-full text-[10px] font-bold shadow-sm uppercase tracking-wide">
-                                        {featuredItem.type}
-                                    </div>
+                                {/* Top Labels */}
+                                <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+                                    <Badge variant="secondary" className={clsx(
+                                        "text-[10px] px-1.5 py-0 h-5 font-normal backdrop-blur-md shadow-sm border-0",
+                                        item.category === 'Citizen Science' ? "bg-sky-100/90 text-sky-700" :
+                                            item.category === 'Learning' ? "bg-amber-100/90 text-amber-700" :
+                                                "bg-lime/90 text-lime-dark"
+                                    )}>
+                                        {item.type}
+                                    </Badge>
+
+                                    {/* Add to Calendar Button */}
+                                    <button className="bg-white/20 backdrop-blur-md text-white p-1.5 rounded-full hover:bg-white/30 transition-colors pointer-events-auto">
+                                        <div className="w-3.5 h-3.5 border-[1.5px] border-current rounded-[3px] flex items-center justify-center relative">
+                                            <div className="absolute top-0 right-0 -mt-0.5 -mr-0.5 w-[1px] h-[3px] bg-current"></div>
+                                            <span className="text-[6px] font-bold leading-none mt-0.5">+</span>
+                                        </div>
+                                    </button>
                                 </div>
 
                                 <h3 className="text-white font-bold text-xl leading-tight mb-1 drop-shadow-sm line-clamp-2">
-                                    {featuredItem.title}
+                                    {item.title}
                                 </h3>
                                 <div className="flex items-center gap-2 text-white/80 text-xs font-medium">
-                                    <span>{new Date(featuredItem.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
+                                    <span>{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
                                     <span>•</span>
-                                    <span>{featuredItem.city}</span>
+                                    <span>{item.city}</span>
                                 </div>
                             </div>
                         </Link>
-                    );
-                })()}
+                    ))}
+                </div>
             </div>
 
             <div className="px-6 mb-4">
