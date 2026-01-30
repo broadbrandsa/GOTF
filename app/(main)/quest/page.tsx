@@ -19,7 +19,20 @@ export default function QuestPage() {
         <div className="pb-6">
             <TopBar title="My Quest" subtitle="Your journey" />
 
-            <div className="px-6 mt-6 mb-8">
+            <div className="px-6 mt-6 mb-6">
+                {/* City Ranking Card */}
+                <div className="bg-white border border-zinc-200 rounded-2xl p-5 shadow-sm text-center mb-6">
+                    <h2 className="text-zinc-500 font-medium text-sm mb-3 uppercase tracking-wide">City Ranking</h2>
+                    <div className="space-y-1">
+                        <div className="text-zinc-800">
+                            Cape Town has earned <span className="text-3xl font-bold text-zinc-900">1,255</span> badges
+                        </div>
+                        <div className="text-zinc-600 font-medium">
+                            Current rank: <span className="text-xl font-bold text-lime-dark">12th</span> globally
+                        </div>
+                    </div>
+                </div>
+
                 <Card className="bg-gradient-to-br from-lime-dark to-lime p-6 text-foreground shadow-lg border-0">
                     <h2 className="text-2xl font-bold mb-2">Almost there!</h2>
                     <p className="font-medium opacity-80">

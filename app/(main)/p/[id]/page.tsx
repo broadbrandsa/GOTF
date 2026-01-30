@@ -58,8 +58,11 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                         {/* Pills Row (Type + Status + Earn Badge) */}
                         <div className="flex flex-wrap items-center gap-2 mb-3">
                             {/* Type Pill */}
-                            <Badge variant="secondary" className="bg-white/90 backdrop-blur-md text-black hover:bg-white border-white/20 capitalize font-medium shadow-sm px-2.5 py-0.5 h-6">
-                                {item.type === 'challenge' ? 'Research' : item.type}
+                            <Badge variant="secondary" className={clsx(
+                                "backdrop-blur-md hover:bg-white border-white/20 capitalize font-medium shadow-sm px-2.5 py-0.5 h-6",
+                                item.type === 'event' ? "bg-white/90 text-lime-900" : "bg-white/90 text-black"
+                            )}>
+                                {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : item.type)}
                             </Badge>
 
                             {/* Status Pill */}

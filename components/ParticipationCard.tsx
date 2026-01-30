@@ -33,9 +33,9 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                                     "text-[10px] px-1.5 py-0 h-5 font-normal",
                                     item.category === 'Citizen Science' ? "bg-sky-100 text-sky-700 hover:bg-sky-100" :
                                         item.category === 'Learning' ? "bg-amber-100 text-amber-700 hover:bg-amber-100" :
-                                            "bg-lime/20 text-lime-dark hover:bg-lime/20"
+                                            (item.type === 'event' ? "bg-lime/20 text-lime-900 hover:bg-lime/20" : "bg-lime/20 text-lime-dark hover:bg-lime/20")
                                 )}>
-                                    {item.type === 'challenge' ? 'Research' : item.type}
+                                    {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : item.type)}
                                 </Badge>
 
                                 {/* Status Pill (Only for Open items) */}

@@ -1,71 +1,78 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { CITIES } from '@/lib/data';
-import { MapPin } from 'lucide-react';
 
-export default function LocationGate() {
+import { Badge } from '@/components/ui/badge';
+import { Search } from 'lucide-react';
+
+export default function IntroPage() {
   const router = useRouter();
-  const [selectedCity, setSelectedCity] = useState<string>(CITIES[0]);
-  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleContinue = () => {
-    setLoading(true);
-    // Simulate a small delay for "app feel"
-    localStorage.setItem('gof_city', selectedCity);
-    setTimeout(() => {
-      router.push('/home');
-    }, 500);
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate navigation on enter/submit, though prompt says "Change location" is non-functional usually, 
+    // but here it says "Find your city". The previous logic saved city.
+    // I will just route to /home on submit for now to allow entry.
+    localStorage.setItem('gof_city', 'Cape Town'); // Defaulting for prototype
+    router.push('/home');
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-cover bg-center"
-      style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1577083288073-40892c0860a4?q=80&w=2696&auto=format&fit=crop")', backgroundBlendMode: 'overlay', backgroundColor: 'rgba(250, 250, 247, 0.9)' }}>
+    <div className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-between py-12">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/Intro screen.jpg"
+          alt="Intro background"
+          className="w-full h-full object-cover"
+        />
+        {/* Black Overlay */}
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
 
-      <div className="w-full max-w-sm space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="text-center space-y-2">
-          <div className="mx-auto w-16 h-16 bg-lime rounded-full flex items-center justify-center mb-6 shadow-lg shadow-lime/20">
-            <MapPin size={32} className="text-lime-dark/80" />
+      {/* Content (Centered) */}
+      <div className="relative z-10 w-full max-w-md px-6 flex flex-col items-center flex-1 justify-center space-y-8">
+        <h1 className="text-4xl sm:text-5xl font-bold text-center text-white leading-tight drop-shadow-md">
+          Small Efforts for a Better World
+        </h1>
+
+        <form onSubmit={handleSearch} className="w-full relative">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70" size={20} />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Find your city"
+              className="w-full h-14 pl-12 pr-4 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-lime-400 transition-all text-lg"
+            />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">Choose your city</h1>
-          <p className="text-muted-foreground text-lg leading-relaxed px-4">
-            This helps us show what’s happening near you first.
-            You can explore other places later.
-          </p>
+        </form>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="relative z-10 w-full max-w-md px-6 flex flex-col items-center space-y-4 mb-8">
+        <p className="text-white/80 font-medium text-sm tracking-wide">
+          How will you contribute?
+        </p>
+
+        <div className="flex flex-wrap gap-2 justify-center">
+          <Badge variant="secondary" className="bg-lime/20 backdrop-blur-md text-lime-300 border-white/10 hover:bg-lime/30 px-4 py-1.5 h-8 text-sm font-medium">
+            Event
+          </Badge>
+          <Badge variant="secondary" className="bg-sky-500/20 backdrop-blur-md text-sky-200 border-white/10 hover:bg-sky-500/30 px-4 py-1.5 h-8 text-sm font-medium">
+            Research
+          </Badge>
+          <Badge variant="secondary" className="bg-amber-500/20 backdrop-blur-md text-amber-200 border-white/10 hover:bg-amber-500/30 px-4 py-1.5 h-8 text-sm font-medium">
+            Webinar
+          </Badge>
         </div>
 
-        <Card className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-muted">Select location</label>
-            <div className="relative">
-              <select
-                value={selectedCity}
-                onChange={(e) => setSelectedCity(e.target.value)}
-                className="w-full h-12 px-4 rounded-xl bg-zinc-50 border border-border appearance-none focus:outline-none focus:ring-2 focus:ring-lime text-base"
-              >
-                {CITIES.map((city) => (
-                  <option key={city} value={city}>{city}</option>
-                ))}
-              </select>
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted">
-                <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <Button
-            className="w-full"
-            onClick={handleContinue}
-            disabled={loading}
-          >
-            {loading ? 'Connecting...' : 'Continue'}
-          </Button>
-        </Card>
+        {/* Invisible clickable area to enter if user doesn't search */}
+        <div onClick={() => router.push('/home')} className="absolute inset-0 cursor-default" style={{ zIndex: -1 }}></div>
       </div>
     </div>
   );
