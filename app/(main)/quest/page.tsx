@@ -9,11 +9,6 @@ import { ArrowRight } from 'lucide-react';
 
 export default function QuestPage() {
     const earnedCount = MOCK_USER_BADGES.length;
-    // Next tier is Steward (requires 8? - Example said 7/10, need 3 more for Steward?)
-    // Prompt: "User has 7 badges out of 10... You need 3 more badges to reach Steward."
-    // Wait, if badges are 10 total. 7+3 = 10. Does Steward require 10?
-    // Tiers: Volunteer, Guardian, Steward, GOF.
-    // I will just hardcode the message as requested.
 
     return (
         <div className="pb-6">
@@ -60,32 +55,44 @@ export default function QuestPage() {
                     ))}
                 </div>
             </div>
+
             {/* Past Contributions Slider */}
             <div className="px-6 mt-8 mb-8">
                 <h3 className="font-bold text-lg mb-4 text-foreground">Your past contributions</h3>
-                <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-2 px-2">
+                <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
                     {PARTICIPATION_ITEMS.filter(item => item.status === 'closed').slice(0, 4).map(item => (
                         <div key={item.id} className="snap-center shrink-0 w-[40vw] sm:w-[160px] flex-none">
-                            <div className="h-[200px] rounded-2xl bg-white border border-zinc-100 shadow-sm p-4 flex flex-col justify-between">
-                                <div>
-                                    <div className="text-[10px] font-bold uppercase tracking-wide text-zinc-400 mb-2">
-                                        {item.type === 'challenge' ? 'Research' : item.type}
-                                    </div>
-                                    <h4 className="font-bold text-sm leading-snug line-clamp-3 mb-3 text-zinc-800">
-                                        {item.title}
-                                    </h4>
+                            <div className="relative h-[200px] rounded-2xl overflow-hidden shadow-sm bg-zinc-900 border border-zinc-200/20 active:scale-[0.98] transition-transform">
+                                {/* Background Image */}
+                                <img
+                                    src={item.imageUrl || '/images/event-local-action-1.jpg'}
+                                    alt={item.title}
+                                    className="absolute inset-0 w-full h-full object-cover opacity-90"
+                                />
 
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none"></div>
+
+                                {/* Content Overlay */}
+                                <div className="absolute inset-0 flex flex-col justify-between p-4">
+                                    {/* Badge Pill (Top Left) */}
                                     {item.earnedBadgeName && (
-                                        <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-lime/10 border border-lime/20">
+                                        <div className="self-start inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/20 backdrop-blur-md border border-white/20 shadow-sm">
                                             <span className="text-xs">🏆</span>
-                                            <span className="text-[10px] font-bold text-lime-dark">{item.earnedBadgeName}</span>
+                                            <span className="text-[10px] font-bold text-white leading-none">You earned a {item.earnedBadgeName} badge</span>
                                         </div>
                                     )}
-                                </div>
 
-                                <Link href={`/p/${item.id}`} className="text-xs font-semibold text-lime-dark hover:underline flex items-center mt-2">
-                                    See the outcome <ArrowRight size={12} className="ml-1" />
-                                </Link>
+                                    {/* Bottom Text */}
+                                    <div className="mt-auto">
+                                        <h4 className="font-bold text-sm leading-tight text-white mb-2 line-clamp-2 drop-shadow-sm">
+                                            {item.title}
+                                        </h4>
+                                        <Link href={`/p/${item.id}`} className="text-xs font-semibold text-lime-400 hover:text-lime-300 hover:underline flex items-center">
+                                            See the outcome <ArrowRight size={12} className="ml-1" />
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
