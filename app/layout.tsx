@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Or any other font
+import { Inter, Inter_Tight } from 'next/font/google';
 import './globals.css';
 import { clsx } from 'clsx';
 
-const font = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const interTight = Inter_Tight({ subsets: ['latin'], variable: '--font-inter-tight' });
 
 export const metadata: Metadata = {
   title: 'Guardians of the Future',
@@ -24,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={clsx(font.className, "bg-zinc-100 min-h-screen")}>
+      <body className={clsx(inter.variable, interTight.variable, "font-sans bg-zinc-100 min-h-screen")}>
         {/* Center on desktop */}
         <div className="mx-auto max-w-md min-h-screen bg-background shadow-xl overflow-hidden relative">
           {children}
