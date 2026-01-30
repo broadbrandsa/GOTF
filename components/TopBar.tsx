@@ -8,15 +8,16 @@ interface TopBarProps {
     children?: React.ReactNode;
 }
 
-export function TopBar({ title, subtitle, showProfile = true, children }: TopBarProps) {
+export function TopBar({ title, subtitle, showProfile = true, children, extraContent }: TopBarProps & { extraContent?: React.ReactNode }) {
     return (
-        <div className="sticky top-0 z-40 bg-[#002700] backdrop-blur-md border-b border-white/10 px-6 pt-12 pb-4 flex justify-between items-end transition-all duration-300">
-            <div>
+        <div className="sticky top-0 z-40 bg-[#002700] backdrop-blur-md border-b border-white/10 px-6 pt-12 pb-4 flex justify-between items-start transition-all duration-300">
+            <div className="flex flex-col items-start">
                 {subtitle && <p className="text-xs font-semibold text-white/70 tracking-wide uppercase mb-1">{subtitle}</p>}
-                {title && <h1 className="text-2xl font-bold text-white leading-none">{title}</h1>}
+                {title && <h1 className="text-2xl font-bold text-white leading-none mb-1">{title}</h1>}
+                {extraContent && <div className="mt-1">{extraContent}</div>}
             </div>
             {showProfile && (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 self-end md:self-auto mb-1">
                     <div className="relative">
                         <Bell size={20} className="text-white/70" />
                         <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red-500 border border-[#002700]" />

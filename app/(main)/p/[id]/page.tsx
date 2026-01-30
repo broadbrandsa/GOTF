@@ -102,12 +102,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                             )}
 
                             {/* Gamification Pill */}
-                            {item.earnedBadgeName && (
-                                <div className="inline-flex items-center px-2.5 h-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white shadow-sm">
-                                    <span className="mr-1 text-sm">🏆</span>
-                                    Earn {item.badgesAwarded?.length && item.badgesAwarded.length > 1 ? `${item.badgesAwarded.length} badges` : `a ${item.earnedBadgeName} badge`}
-                                </div>
-                            )}
+
                         </div>
 
                         {/* Title */}
@@ -166,25 +161,12 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                             <div className="p-6">
                                 <h3 className="font-bold text-lime-dark mb-2 flex items-center gap-2">
                                     <CheckCircle size={18} /> Outcome Reported
-                                    <Badge variant="outline" className={clsx(
-                                        "backdrop-blur-md border-white/40 text-white font-medium capitalize shadow-sm px-2.5 py-0.5 h-6",
-                                        isClosed && "bg-zinc-800/80 border-zinc-700"
-                                    )}>
-                                        {item.status === 'open' ? 'Open' : 'Closed'}
-                                    </Badge>
                                 </h3>
-                                <h1 className="text-3xl font-bold leading-tight mb-2 drop-shadow-md">{item.title}</h1>
 
-                                {/* Goal Description */}
+                                {/* Outcome Description */}
                                 <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed line-clamp-3 mb-3">
-                                    {item.goal}
+                                    {(item as any).outcomeDescription || item.outcomeSummary}
                                 </p>
-
-                                {/* Meta Data (Moved to Overlay) */}
-                                <div className="flex items-center gap-4 text-sm font-medium text-white/90">
-                                    <span className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(item.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>
-                                    <span className="flex items-center gap-1.5"><MapPin size={14} /> {item.mode === 'online' ? (item.platform || 'Online') : item.city}</span>
-                                </div>
                             </div>
                         </Card>
                     </div>

@@ -46,12 +46,21 @@ export default function HomePage() {
 
     return (
         <div className="pb-6">
-            <TopBar title="Hello, Guardian" subtitle="Welcome back">
-                <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">{city}</span>
-                    <span className="text-xs text-muted-foreground underline opacity-60 hover:opacity-100 cursor-pointer transition-opacity">change location</span>
-                </div>
-            </TopBar>
+            <TopBar
+                title="Hello, Guardian"
+                subtitle="Welcome back"
+                extraContent={
+                    <div className="flex items-center gap-2 mt-1">
+                        <span className="text-sm font-medium text-white">{city}</span>
+                        <span
+                            className="text-xs text-white/60 hover:text-white cursor-pointer transition-colors"
+                            onClick={() => { /* Logic to change city if needed, for now just UI */ }}
+                        >
+                            change location
+                        </span>
+                    </div>
+                }
+            />
 
             <div className="px-6 mt-4">
                 <Link href="/quest" className="block w-full max-w-sm">

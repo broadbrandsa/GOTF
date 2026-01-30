@@ -105,6 +105,7 @@ export const PARTICIPATION_ITEMS: Participation[] = [
         badgesAwarded: [BADGES[1]],
         earnedBadgeName: 'Guardian',
         outcomeSummary: 'We cleared 2 hectares of alien vegetation, saving an estimated 10,000 liters of water per year for the catchment area.',
+        outcomeDescription: 'Volunteers gathered early morning to tackle the invasive Port Jackson willow. It was a successful day ensuring the local biodiversity can thrive.',
         outcomeImage: '/images/outcome-1.jpg',
         imageUrl: '/images/event-local-action-2.jpg',
         contributedMemberIds: ['m2', 'm4', 'm1']
