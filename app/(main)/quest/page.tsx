@@ -6,6 +6,7 @@ import { BADGES, MOCK_USER_BADGES, PARTICIPATION_ITEMS } from '@/lib/data';
 import { BadgeIcon } from '@/components/BadgeIcon';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { clsx } from 'clsx';
 
 export default function QuestPage() {
     const earnedCount = MOCK_USER_BADGES.length;
@@ -15,30 +16,52 @@ export default function QuestPage() {
             <TopBar title="My Quest" subtitle="Your journey" />
 
             <div className="px-6 mt-6 mb-6">
-                {/* City Ranking Card */}
-                <div className="bg-white border border-zinc-200 rounded-2xl p-5 shadow-sm text-center mb-6">
-                    <h2 className="text-zinc-500 font-medium text-sm mb-3 uppercase tracking-wide">City Ranking</h2>
-                    <div className="space-y-1">
-                        <div className="text-zinc-800">
-                            Cape Town has earned <span className="text-3xl font-bold text-zinc-900">1,255</span> badges
-                        </div>
-                        <div className="text-zinc-600 font-medium">
-                            Current rank: <span className="text-xl font-bold text-lime-dark">12th</span> globally
-                        </div>
+                {/* City Ranking Metrics */}
+                <div className="grid grid-cols-3 gap-2 mb-6">
+                    <div className="bg-white border border-zinc-200 rounded-xl p-3 flex flex-col justify-center items-center text-center shadow-sm">
+                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wide leading-tight mb-1">City Rank</span>
+                        <span className="text-xl font-bold text-zinc-900">12th</span>
+                    </div>
+                    <div className="bg-white border border-zinc-200 rounded-xl p-3 flex flex-col justify-center items-center text-center shadow-sm">
+                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wide leading-tight mb-1">City Badges</span>
+                        <span className="text-lg font-bold text-zinc-900">1,255</span>
+                    </div>
+                    <div className="bg-white border border-zinc-200 rounded-xl p-3 flex flex-col justify-center items-center text-center shadow-sm">
+                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wide leading-tight mb-1">Your Badges</span>
+                        <span className="text-xl font-bold text-lime-dark">7</span>
                     </div>
                 </div>
 
-                <Card className="bg-gradient-to-br from-lime-dark to-lime p-6 text-foreground shadow-lg border-0">
-                    <h2 className="text-2xl font-bold mb-2">Almost there!</h2>
-                    <p className="font-medium opacity-80">
+                <Card className="bg-lime p-6 text-foreground shadow-sm border-0 relative overflow-hidden">
+                    <h2 className="text-2xl font-bold mb-2 relative z-10">Almost there!</h2>
+                    <p className="font-medium opacity-80 relative z-10 mb-6">
                         You need 3 more badges to reach <span className="font-bold underline">Steward</span>.
                     </p>
-                    <div className="mt-4 w-full bg-white/30 h-3 rounded-full overflow-hidden backdrop-blur-sm">
-                        <div className="bg-foreground h-full rounded-full w-[70%]"></div>
-                    </div>
-                    <div className="flex justify-between mt-1 text-xs font-semibold opacity-60">
-                        <span>Guardian</span>
-                        <span>Steward</span>
+
+                    {/* Milestone Progress Strip */}
+                    <div className="relative w-full h-12 flex items-center justify-between px-1 z-10">
+                        {/* Line */}
+                        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-black/10 rounded-full"></div>
+
+                        {/* Dots */}
+                        {['Volunteer', 'Guardian', 'Steward', 'GOF'].map((tier, i) => {
+                            const isCompleted = i <= 1; // Current tier is Guardian (index 1)
+                            const isCurrent = i === 1;
+                            return (
+                                <div key={tier} className="relative flex flex-col items-center group">
+                                    <div className={clsx(
+                                        "w-3 h-3 rounded-full border-2 transition-colors z-10",
+                                        isCompleted ? "bg-zinc-900 border-zinc-900" : "bg-white/50 border-transparent",
+                                        isCurrent && "ring-4 ring-white/30"
+                                    )}></div>
+                                    {isCurrent && (
+                                        <div className="absolute -bottom-6 text-[10px] font-bold uppercase tracking-wider opacity-60">
+                                            {tier}
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
                 </Card>
             </div>

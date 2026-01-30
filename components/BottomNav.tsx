@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, Trophy, Map, Users, Star, Lightbulb } from 'lucide-react'; // Using icons roughly mapping to the needs
+import { Home, Calendar, Trophy, Map, Users, Star, Lightbulb, Compass } from 'lucide-react'; // Using icons roughly mapping to the needs
 import { clsx } from 'clsx';
 
 export function BottomNav() {
@@ -11,7 +11,7 @@ export function BottomNav() {
     const navItems = [
         { href: '/home', label: 'Home', icon: Home },
         { href: '/events', label: 'Participate', icon: Calendar },
-        { href: '/discover', label: 'Discover', icon: Lightbulb },
+        { href: '/discover', label: 'Discover', icon: Compass },
         { href: '/community', label: 'Community', icon: Users },
         { href: '/outcomes', label: 'Outcomes', icon: Star }
     ];
@@ -19,8 +19,8 @@ export function BottomNav() {
     const allItems = navItems;
 
     return (
-        <div className="fixed bottom-4 inset-x-4 max-w-md mx-auto z-50">
-            <nav className="flex justify-around items-center h-[72px] rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-zinc-200/50 px-2 pb-1">
+        <div className="fixed bottom-6 left-0 right-0 flex justify-center z-50 pointer-events-none">
+            <nav className="bg-white/95 backdrop-blur-md border border-zinc-200/50 rounded-full px-6 py-3 flex items-center gap-8 pointer-events-auto">
                 {allItems.map((item) => {
                     const isActive = pathname.startsWith(item.href);
                     const Icon = item.icon;

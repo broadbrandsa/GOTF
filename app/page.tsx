@@ -25,13 +25,13 @@ export default function IntroPage() {
           alt="Intro background"
           className="w-full h-full object-cover"
         />
-        {/* Black Overlay */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        {/* Gradient Overlay (Dark bottom -> Clear top) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
       </div>
 
       {/* Content (Bottom Aligned) */}
       <div className="relative z-10 w-full px-6 flex flex-col items-center space-y-6 animate-in slide-in-from-bottom-8 duration-700 fade-in">
-        <h1 className="text-4xl sm:text-5xl font-bold text-center text-white leading-tight drop-shadow-md max-w-xs mx-auto">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-white leading-tight drop-shadow-md max-w-xs mx-auto">
           Small Efforts for a Better World
         </h1>
 

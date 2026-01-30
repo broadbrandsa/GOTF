@@ -81,7 +81,7 @@ export default function HomePage() {
                 {/* Horizontal Slider */}
                 <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide px-6 -mx-0">
                     {PARTICIPATION_ITEMS.slice(0, 5).map(item => (
-                        <Link key={item.id} href={`/p/${item.id}`} className="snap-center shrink-0 block relative h-[50vh] w-[80vw] sm:w-[45vw] max-w-sm rounded-2xl overflow-hidden shadow-md group active:scale-[0.99] transition-transform">
+                        <Link key={item.id} href={`/p/${item.id}`} className="snap-center shrink-0 block relative h-[35vh] sm:h-[200px] w-[80vw] sm:w-[45vw] max-w-sm rounded-2xl overflow-hidden shadow-md group active:scale-[0.99] transition-transform">
                             <img
                                 src={item.imageUrl || '/images/event-local-action-1.jpg'}
                                 alt={item.title}
@@ -101,11 +101,9 @@ export default function HomePage() {
                                     </Badge>
 
                                     {/* Add to Calendar Button */}
-                                    <button className="bg-white/20 backdrop-blur-md text-white p-1.5 rounded-full hover:bg-white/30 transition-colors pointer-events-auto">
-                                        <div className="w-3.5 h-3.5 border-[1.5px] border-current rounded-[3px] flex items-center justify-center relative">
-                                            <div className="absolute top-0 right-0 -mt-0.5 -mr-0.5 w-[1px] h-[3px] bg-current"></div>
-                                            <span className="text-[6px] font-bold leading-none mt-0.5">+</span>
-                                        </div>
+                                    <button className="bg-white/20 backdrop-blur-md text-white/90 px-2 py-1 rounded-full hover:bg-white/30 transition-colors pointer-events-auto flex items-center gap-1.5">
+                                        <span className="text-[10px] font-bold">Add to calendar</span>
+                                        <ArrowRight size={10} className="text-white" />
                                     </button>
                                 </div>
 
@@ -119,6 +117,26 @@ export default function HomePage() {
                                 </div>
                             </div>
                         </Link>
+                    ))}
+                </div>
+            </div>
+
+            {/* Top Contributors Section */}
+            <div className="mb-6 px-6">
+                <h2 className="text-sm font-bold text-foreground mb-3 uppercase tracking-wide opacity-80">Top Contributors This Month</h2>
+                <div className="flex flex-wrap gap-2">
+                    {/* Mock members (using IDs from MEMBERS list if imported, or mocking inline for now if not available in imports) */}
+                    {[
+                        { name: 'Thandiwe', img: '/images/ben-den-engelsen-YUu9UAcOKZ4-unsplash.jpg' },
+                        { name: 'David', img: '/images/ayo-ogunseinde-sibVwORYqs0-unsplash.jpg' },
+                        { name: 'Mike', img: '/images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg' },
+                        { name: 'Sarah', img: '/images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg' },
+                        { name: 'Jessica', img: '/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg' },
+                    ].map((m, i) => (
+                        <div key={i} className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-white border border-zinc-100 shadow-sm">
+                            <img src={m.img} alt={m.name} className="w-5 h-5 rounded-full object-cover" />
+                            <span className="text-xs font-medium text-zinc-700">{m.name}</span>
+                        </div>
                     ))}
                 </div>
             </div>
