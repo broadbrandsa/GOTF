@@ -62,7 +62,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                                 "backdrop-blur-md hover:bg-white border-white/20 capitalize font-medium shadow-sm px-2.5 py-0.5 h-6",
                                 item.type === 'event' ? "bg-white/90 text-lime-900" : "bg-white/90 text-black"
                             )}>
-                                {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : item.type)}
+                                {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : (item.type === 'webinar' ? 'Webinar' : item.type))}
                             </Badge>
 
                             {/* Status Pill */}
@@ -219,12 +219,12 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                     </section>
 
                     <section>
-                        <h3 className="font-bold text-lg mb-3 text-foreground">What you'll do</h3>
+                        <h3 className="font-bold text-lg mb-3 text-foreground">{isClosed ? 'What was done' : "What you'll do"}</h3>
                         <ul className="space-y-3">
-                            {item.whatYouDo.map((step, i) => (
+                            {(isClosed && item.whatWasDone ? item.whatWasDone : item.whatYouDo).map((step, i) => (
                                 <li key={i} className="flex gap-3">
                                     <span className="flex-none w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center text-xs font-bold text-zinc-500 border border-zinc-200">
-                                        {i + 1}
+                                        {isClosed ? <CheckCircle size={12} className="text-lime-dark" /> : i + 1}
                                     </span>
                                     <span className="text-muted-foreground text-sm leading-relaxed pt-0.5">{step}</span>
                                 </li>

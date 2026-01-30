@@ -27,6 +27,7 @@ export interface Participation {
   goal: string;
   whyItMatters: string;
   whatYouDo: string[];
+  whatWasDone?: string[];
   tags: string[];
   badgesAwarded?: Badge[];
   earnedBadgeName?: BadgeName; // Specific named badge

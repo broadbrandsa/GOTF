@@ -95,9 +95,9 @@ export default function HomePage() {
                                         "text-[10px] px-1.5 py-0 h-5 font-normal backdrop-blur-md shadow-sm border-0",
                                         item.category === 'Citizen Science' ? "bg-sky-100/90 text-sky-700" :
                                             item.category === 'Learning' ? "bg-amber-100/90 text-amber-700" :
-                                                "bg-lime/90 text-lime-dark"
+                                                "bg-lime/90 text-lime-900"
                                     )}>
-                                        {item.type}
+                                        {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : (item.type === 'webinar' ? 'Webinar' : item.type))}
                                     </Badge>
 
                                     {/* Add to Calendar Button */}
@@ -138,6 +138,6 @@ export default function HomePage() {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 }

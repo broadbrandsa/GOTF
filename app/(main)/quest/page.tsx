@@ -62,7 +62,7 @@ export default function QuestPage() {
                 <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
                     {PARTICIPATION_ITEMS.filter(item => item.status === 'closed').slice(0, 4).map(item => (
                         <div key={item.id} className="snap-center shrink-0 w-[40vw] sm:w-[160px] flex-none">
-                            <div className="relative h-[200px] rounded-2xl overflow-hidden shadow-sm bg-zinc-900 border border-zinc-200/20 active:scale-[0.98] transition-transform">
+                            <div className="relative h-[200px] rounded-2xl overflow-hidden shadow-sm bg-zinc-900 active:scale-[0.98] transition-transform">
                                 {/* Background Image */}
                                 <img
                                     src={item.imageUrl || '/images/event-local-action-1.jpg'}

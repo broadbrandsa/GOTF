@@ -24,9 +24,11 @@ export default function CommunityPage() {
 
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium border-border justify-between gap-2">
-                            Cape Town
-                            <ChevronDown size={14} className="text-muted-foreground" />
+                        <Button variant="outline" className="rounded-full h-9 px-4 text-sm font-medium bg-white border border-zinc-200 shadow-sm hover:bg-zinc-50 hover:border-zinc-300 justify-between gap-2 min-w-[140px]">
+                            <span className="flex items-center gap-2">
+                                <span className="text-lime-dark">📍</span> Cape Town
+                            </span>
+                            <ChevronDown size={14} className="text-muted-foreground opacity-50" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start">
