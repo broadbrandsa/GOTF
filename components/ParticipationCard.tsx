@@ -30,10 +30,11 @@ export function ParticipationCard({ item }: ParticipationCardProps) {
                             {/* Badges Row */}
                             <div className="flex flex-wrap gap-1.5 items-center">
                                 <Badge variant="secondary" className={clsx(
-                                    "text-[10px] px-1.5 py-0 h-5 font-normal",
-                                    item.category === 'Citizen Science' ? "bg-sky-100 text-sky-700 hover:bg-sky-100" :
-                                        item.category === 'Learning' ? "bg-amber-100 text-amber-700 hover:bg-amber-100" :
-                                            (item.type === 'event' ? "bg-lime/20 text-lime-900 hover:bg-lime/20" : "bg-lime/20 text-lime-dark hover:bg-lime/20")
+                                    "text-[10px] px-1.5 py-0 h-5 font-normal border-0",
+                                    item.status === 'closed' ? "bg-[#E694BA] text-zinc-900" :
+                                        item.type === 'challenge' ? "bg-[#8377DF] text-white" :
+                                            item.type === 'webinar' ? "bg-[#EC956E] text-zinc-900" :
+                                                "bg-[#B5E28B] text-zinc-900" // Event default
                                 )}>
                                     {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : (item.type === 'webinar' ? 'Webinar' : item.type))}
                                 </Badge>

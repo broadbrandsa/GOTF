@@ -32,8 +32,32 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
         ? "bg-white/90 text-zinc-900 border-white/20"
         : "bg-red-500/90 text-white animate-pulse border-red-400/50";
 
+    // Determine Page Background & Text Color based on type
+    let pageBgClass = "bg-[#002700]"; // Fallback
+    let textColorClass = "text-white";
+
+    if (isClosed) {
+        pageBgClass = "bg-[#E694BA]"; // Impact Report
+        textColorClass = "text-zinc-900";
+    } else {
+        switch (item.type) {
+            case 'event':
+                pageBgClass = "bg-[#B5E28B]";
+                textColorClass = "text-zinc-900";
+                break;
+            case 'challenge': // Research
+                pageBgClass = "bg-[#8377DF]";
+                textColorClass = "text-white";
+                break;
+            case 'webinar':
+                pageBgClass = "bg-[#EC956E]";
+                textColorClass = "text-zinc-900";
+                break;
+        }
+    }
+
     return (
-        <div className="pb-24 bg-background min-h-screen">
+        <div className={clsx("min-h-screen pb-24", pageBgClass, textColorClass)}>
             {/* 50vh Hero Section */}
             <div className="relative w-full h-[50vh]">
                 {/* Background Image */}
@@ -170,63 +194,50 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                             <div className="p-6">
                                 <h3 className="font-bold text-lime-dark mb-2 flex items-center gap-2">
                                     <CheckCircle size={18} /> Outcome Reported
+                                    <Badge variant="outline" className={clsx(
+                                        "backdrop-blur-md border-white/40 text-white font-medium capitalize shadow-sm px-2.5 py-0.5 h-6",
+                                        isClosed && "bg-zinc-800/80 border-zinc-700"
+                                    )}>
+                                        {item.status === 'open' ? 'Open' : 'Closed'}
+                                    </Badge>
                                 </h3>
-                                <p className="text-foreground leading-relaxed text-sm">
-                                    {item.outcomeSummary}
-                                </p>
+                                <h1 className="text-3xl font-bold leading-tight mb-2 drop-shadow-md">{item.title}</h1>
+                                <div className="flex items-center gap-4 text-sm font-medium opacity-90">
+                                    <span className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(item.date).toLocaleDateString()}</span>
+                                    <span className="flex items-center gap-1.5"><MapPin size={14} /> {item.city}</span>
+                                </div>
                             </div>
                         </Card>
-                        {item.outcomeImage && (
-                            <div className="w-full h-48 rounded-2xl overflow-hidden shadow-sm">
-                                <img
-                                    src={item.outcomeImage}
-                                    alt="Outcome result"
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                        )}
                     </div>
                 )}
+            </div>
 
-                {/* Members Contributed (Closed) */}
-                {isClosed && item.contributedMemberIds && item.contributedMemberIds.length > 0 && (
-                    <div className="space-y-3 pt-2">
-                        <p className="text-sm font-medium text-zinc-600">
-                            {item.contributedMemberIds.length} members contributed to this {item.type === 'challenge' ? 'Research' : 'Event'}.
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                            {item.contributedMemberIds.map(mid => {
-                                const member = MEMBERS.find(m => m.id === mid);
-                                if (!member) return null;
-                                return (
-                                    <div key={mid} className="flex items-center gap-2 pl-1 pr-3 py-1 bg-zinc-50 border border-zinc-100 rounded-full shadow-sm hover:border-lime/30 transition-colors">
-                                        <div className="w-5 h-5 rounded-full overflow-hidden bg-zinc-200">
-                                            <img src={member.avatarImage || '/images/profile-icon.jpg'} alt={member.name} className="w-full h-full object-cover" />
-                                        </div>
-                                        <span className="text-xs font-semibold text-zinc-700">{member.name}</span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
+            <div className="px-6 py-8">
+                {/* Stats Row */}
+                <div className="flex gap-4 mb-8 overflow-x-auto pb-2 scrollbar-hide">
+                    {/* ... stats ... */}
+                </div>
 
                 {/* Content Sections */}
                 <div className="space-y-8">
                     <section>
-                        <h3 className="font-bold text-lg mb-2 text-foreground">Why it matters</h3>
-                        <p className="text-muted-foreground leading-relaxed text-sm">{item.whyItMatters}</p>
+                        <h3 className={clsx("font-bold text-lg mb-2", textColorClass)}>Why it matters</h3>
+                        <p className={clsx("leading-relaxed text-sm opacity-90", textColorClass)}>{item.whyItMatters}</p>
                     </section>
 
                     <section>
-                        <h3 className="font-bold text-lg mb-3 text-foreground">{isClosed ? 'What was done' : "What you'll do"}</h3>
+                        <h3 className={clsx("font-bold text-lg mb-3", textColorClass)}>{isClosed ? 'What was done' : "What you'll do"}</h3>
                         <ul className="space-y-3">
                             {(isClosed && item.whatWasDone ? item.whatWasDone : item.whatYouDo).map((step, i) => (
                                 <li key={i} className="flex gap-3">
-                                    <span className="flex-none w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center text-xs font-bold text-zinc-500 border border-zinc-200">
-                                        {isClosed ? <CheckCircle size={12} className="text-lime-dark" /> : i + 1}
+                                    <span className={clsx(
+                                        "flex-none w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border",
+                                        // Adjust step circle colors based on background
+                                        textColorClass === 'text-white' ? "bg-white/20 text-white border-white/30" : "bg-black/10 text-black border-black/10"
+                                    )}>
+                                        {isClosed ? <CheckCircle size={12} /> : i + 1}
                                     </span>
-                                    <span className="text-muted-foreground text-sm leading-relaxed pt-0.5">{step}</span>
+                                    <span className={clsx("text-sm leading-relaxed pt-0.5 opacity-90", textColorClass)}>{step}</span>
                                 </li>
                             ))}
                         </ul>

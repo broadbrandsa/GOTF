@@ -63,13 +63,13 @@ export default function IntroPage() {
           </p>
 
           <div className="flex flex-wrap gap-2 justify-center">
-            <Badge variant="secondary" className="bg-lime/20 backdrop-blur-md text-lime-300 border-white/10 hover:bg-lime/30 px-4 py-1.5 h-8 text-sm font-medium">
+            <Badge variant="secondary" className="bg-[#B5E28B] text-zinc-900 border-white/10 hover:bg-[#B5E28B]/90 px-4 py-1.5 h-8 text-sm font-medium">
               Event
             </Badge>
-            <Badge variant="secondary" className="bg-sky-500/20 backdrop-blur-md text-sky-200 border-white/10 hover:bg-sky-500/30 px-4 py-1.5 h-8 text-sm font-medium">
+            <Badge variant="secondary" className="bg-[#8377DF] text-white border-white/10 hover:bg-[#8377DF]/90 px-4 py-1.5 h-8 text-sm font-medium">
               Research
             </Badge>
-            <Badge variant="secondary" className="bg-amber-500/20 backdrop-blur-md text-amber-200 border-white/10 hover:bg-amber-500/30 px-4 py-1.5 h-8 text-sm font-medium">
+            <Badge variant="secondary" className="bg-[#EC956E] text-zinc-900 border-white/10 hover:bg-[#EC956E]/90 px-4 py-1.5 h-8 text-sm font-medium">
               Webinar
             </Badge>
           </div>

@@ -25,9 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={clsx(inter.variable, interTight.variable, "font-sans bg-zinc-100 min-h-screen")}>
+      <body className={clsx(inter.variable, interTight.variable, "font-sans min-h-screen")}>
         {/* Center on desktop */}
-        <div className="mx-auto max-w-md min-h-screen bg-background shadow-xl overflow-hidden relative">
+        <div className="mx-auto max-w-md min-h-screen shadow-xl overflow-hidden relative">
           {children}
         </div>
       </body>

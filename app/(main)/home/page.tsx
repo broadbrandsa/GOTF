@@ -93,9 +93,10 @@ export default function HomePage() {
                                 <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
                                     <Badge variant="secondary" className={clsx(
                                         "text-[10px] px-1.5 py-0 h-5 font-normal backdrop-blur-md shadow-sm border-0",
-                                        item.category === 'Citizen Science' ? "bg-sky-100/90 text-sky-700" :
-                                            item.category === 'Learning' ? "bg-amber-100/90 text-amber-700" :
-                                                "bg-lime/90 text-lime-900"
+                                        item.status === 'closed' ? "bg-[#E694BA] text-zinc-900" :
+                                            item.type === 'challenge' ? "bg-[#8377DF] text-white" :
+                                                item.type === 'webinar' ? "bg-[#EC956E] text-zinc-900" :
+                                                    "bg-[#B5E28B] text-zinc-900"
                                     )}>
                                         {item.type === 'challenge' ? 'Research' : (item.type === 'event' ? 'Event' : (item.type === 'webinar' ? 'Webinar' : item.type))}
                                     </Badge>
