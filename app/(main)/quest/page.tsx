@@ -86,7 +86,7 @@ export default function QuestPage() {
 
             {/* Past Contributions Slider */}
             <div className="px-6 mt-8 mb-8">
-                <h3 className="font-bold text-lg mb-4 text-foreground">Your past contributions</h3>
+                <h3 className="font-bold text-lg mb-4 text-white">Your past contributions</h3>
                 <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-6 px-6">
                     {PARTICIPATION_ITEMS.filter(item => item.status === 'closed').slice(0, 4).map(item => (
                         <div key={item.id} className="snap-center shrink-0 w-[40vw] sm:w-[160px] flex-none">
