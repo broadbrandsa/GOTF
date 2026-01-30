@@ -139,7 +139,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                 {/* Members Joined (Open) */}
                 {!isClosed && item.joinedMemberIds && item.joinedMemberIds.length > 0 && (
                     <div className="space-y-3 pt-2">
-                        <p className="text-sm font-medium text-zinc-600">
+                        <p className="text-sm font-medium text-white">
                             {item.joinedMemberIds.length} members have joined this {item.type === 'challenge' ? 'Research' : 'Event'}.
                         </p>
                         <div className="flex flex-wrap gap-2">
@@ -196,7 +196,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
 
                 {/* CTA Button */}
                 {!isClosed && (
-                    <Button className="w-full rounded-full h-12 text-base font-bold bg-lime text-zinc-900 hover:bg-lime-400 shadow-sm transition-all active:scale-[0.99] border border-lime-400/50 mb-2">
+                    <Button className="w-full rounded-full h-12 text-base font-bold bg-lime text-zinc-900 hover:bg-lime-400 shadow-sm transition-all active:scale-[0.99] border border-lime-400/50 mb-8">
                         {item.type === 'challenge' ? 'Join Research' : 'Join Event'}
                         <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
