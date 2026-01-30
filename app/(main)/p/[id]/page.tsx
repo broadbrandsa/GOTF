@@ -134,13 +134,7 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
 
                 {/* Meta Data Panel REMOVED - CTA and Content follow directly */}
 
-                {/* CTA Button */}
-                {!isClosed && (
-                    <Button className="w-full rounded-full h-12 text-base font-bold bg-lime text-zinc-900 hover:bg-lime-400 shadow-sm transition-all active:scale-[0.99] border border-lime-400/50">
-                        {item.type === 'challenge' ? 'Join Research' : 'Join Event'}
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                )}
+                {/* CTA Button REMOVED (Duplicate) */}
 
                 {/* Members Joined (Open) */}
                 {!isClosed && item.joinedMemberIds && item.joinedMemberIds.length > 0 && (
