@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { ParticipationCard } from '@/components/ParticipationCard';
 import { TopBar } from '@/components/TopBar';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { clsx } from 'clsx';
-import { PARTICIPATION_ITEMS } from '@/lib/data';
+import { PARTICIPATION_ITEMS, MEMBERS } from '@/lib/data';
 import { Participation } from '@/lib/types';
 import { MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
@@ -124,19 +125,24 @@ export default function HomePage() {
 
             {/* Top Contributors Section */}
             <div className="mb-6 px-6">
-                <h2 className="text-sm font-bold text-foreground mb-3 uppercase tracking-wide opacity-80">Top Contributors This Month</h2>
-                <div className="flex flex-wrap gap-2">
-                    {/* Mock members (using IDs from MEMBERS list if imported, or mocking inline for now if not available in imports) */}
-                    {[
-                        { name: 'Thandiwe', img: '/images/ben-den-engelsen-YUu9UAcOKZ4-unsplash.jpg' },
-                        { name: 'David', img: '/images/ayo-ogunseinde-sibVwORYqs0-unsplash.jpg' },
-                        { name: 'Mike', img: '/images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg' },
-                        { name: 'Sarah', img: '/images/christopher-campbell-rDEOVtE7vOs-unsplash.jpg' },
-                        { name: 'Jessica', img: '/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg' },
-                    ].map((m, i) => (
-                        <div key={i} className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-white border border-zinc-100 shadow-sm">
-                            <img src={m.img} alt={m.name} className="w-5 h-5 rounded-full object-cover" />
-                            <span className="text-xs font-medium text-zinc-700">{m.name}</span>
+                <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-base font-semibold text-white">Top contributors this month</h2>
+                    <Button variant="ghost" size="sm" className="text-lime hover:text-lime-400 p-0 h-auto font-medium text-xs" asChild>
+                        <Link href="/community">View all</Link>
+                    </Button>
+                </div>
+
+                {/* Horizontal Slider */}
+                <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide space-x-3 pb-2 -mx-2 px-2">
+                    {MEMBERS.map((member) => (
+                        <div key={member.id} className="flex-none snap-start backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-3 flex flex-col items-center justify-center w-[100px] h-[100px] gap-2">
+                            <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30">
+                                <img src={member.avatarImage} alt={member.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="text-center w-full">
+                                <div className="text-xs font-semibold text-white truncate w-full px-1">{member.name}</div>
+                                <div className="text-[10px] text-lime-300 font-medium">{member.badgesEarned} badges</div>
+                            </div>
                         </div>
                     ))}
                 </div>

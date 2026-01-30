@@ -116,45 +116,23 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                         </h1>
 
                         {/* Goal Description (Short) */}
-                        <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed line-clamp-3">
+                        <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed line-clamp-2 mb-3">
                             {item.goal}
                         </p>
+
+                        {/* Meta Data (On Overlay) */}
+                        <div className="flex items-center flex-wrap gap-4 text-sm font-medium text-white">
+                            <span className="flex items-center gap-1.5 bg-black/20 backdrop-blur-sm px-2 py-0.5 rounded-md"><Calendar size={14} className="text-lime-300" /> {new Date(item.date).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}</span>
+                            <span className="flex items-center gap-1.5 bg-black/20 backdrop-blur-sm px-2 py-0.5 rounded-md"><MapPin size={14} className="text-lime-300" /> {item.mode === 'online' ? (item.platform || 'Online') : item.city}</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* Main Content Body */}
-            <div className="px-6 py-8 space-y-8">
+            <div className="px-6 py-6 space-y-6">
 
-                {/* Meta Data Panel */}
-                <div className="space-y-4 text-sm text-zinc-600 bg-zinc-50 p-5 rounded-2xl border border-zinc-100">
-                    {/* Date */}
-                    <div className="flex items-center gap-3">
-                        <Calendar className="shrink-0 text-lime-dark" size={18} />
-                        <span className="font-medium text-foreground">
-                            {new Date(item.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
-                        </span>
-                    </div>
-
-                    {/* Location */}
-                    <div className="flex items-start gap-3">
-                        <MapPin className="mt-0.5 shrink-0 text-lime-dark" size={18} />
-                        <div>
-                            <span className="font-medium text-foreground">
-                                {item.mode === 'online' ? (item.platform || 'Online') : item.city}
-                            </span>
-                            {(item.area && item.mode !== 'online') && <span className="text-muted-foreground">, {item.area}</span>}
-                        </div>
-                    </div>
-
-                    {/* Research Partner */}
-                    {item.researchPartner && (
-                        <div className="flex items-start gap-3 pt-3 border-t border-dashed border-zinc-200 mt-1">
-                            <div className="shrink-0 w-[18px] flex justify-center text-sky-600">🔬</div>
-                            <span className="text-muted-foreground">Partner: <span className="font-semibold text-sky-700">{item.researchPartner}</span></span>
-                        </div>
-                    )}
-                </div>
+                {/* Meta Data Panel REMOVED - CTA and Content follow directly */}
 
                 {/* CTA Button */}
                 {!isClosed && (
@@ -202,9 +180,16 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                                     </Badge>
                                 </h3>
                                 <h1 className="text-3xl font-bold leading-tight mb-2 drop-shadow-md">{item.title}</h1>
-                                <div className="flex items-center gap-4 text-sm font-medium opacity-90">
-                                    <span className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(item.date).toLocaleDateString()}</span>
-                                    <span className="flex items-center gap-1.5"><MapPin size={14} /> {item.city}</span>
+
+                                {/* Goal Description */}
+                                <p className="text-white/90 text-sm sm:text-base font-medium leading-relaxed line-clamp-3 mb-3">
+                                    {item.goal}
+                                </p>
+
+                                {/* Meta Data (Moved to Overlay) */}
+                                <div className="flex items-center gap-4 text-sm font-medium text-white/90">
+                                    <span className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(item.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>
+                                    <span className="flex items-center gap-1.5"><MapPin size={14} /> {item.mode === 'online' ? (item.platform || 'Online') : item.city}</span>
                                 </div>
                             </div>
                         </Card>
@@ -212,14 +197,19 @@ export default async function ParticipationDetailsPage({ params }: PageProps) {
                 )}
             </div>
 
-            <div className="px-6 py-8">
-                {/* Stats Row */}
-                <div className="flex gap-4 mb-8 overflow-x-auto pb-2 scrollbar-hide">
-                    {/* ... stats ... */}
-                </div>
+            <div className="px-6 py-4 space-y-6">
+                {/* Stats Row removed/placeholder */}
 
-                {/* Content Sections */}
-                <div className="space-y-8">
+                {/* CTA Button */}
+                {!isClosed && (
+                    <Button className="w-full rounded-full h-12 text-base font-bold bg-lime text-zinc-900 hover:bg-lime-400 shadow-sm transition-all active:scale-[0.99] border border-lime-400/50 mb-2">
+                        {item.type === 'challenge' ? 'Join Research' : 'Join Event'}
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                )}
+
+                {/* Main Content Body */}
+                <div className="space-y-6">
                     <section>
                         <h3 className={clsx("font-bold text-lg mb-2", textColorClass)}>Why it matters</h3>
                         <p className={clsx("leading-relaxed text-sm opacity-90", textColorClass)}>{item.whyItMatters}</p>
