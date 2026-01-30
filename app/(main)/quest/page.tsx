@@ -16,19 +16,24 @@ export default function QuestPage() {
             <TopBar title="My Quest" subtitle="Your journey" />
 
             <div className="px-6 mt-6 mb-6">
-                {/* City Ranking Metrics */}
-                <div className="grid grid-cols-3 gap-2 mb-6">
-                    <div className="bg-white border border-zinc-200 rounded-xl p-3 flex flex-col justify-center items-center text-center shadow-sm">
-                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wide leading-tight mb-1">City Rank</span>
-                        <span className="text-xl font-bold text-zinc-900">12th</span>
+                {/* Metric Row (Redesigned) */}
+                <div className="flex items-center justify-between py-2 px-2">
+                    {/* Rank */}
+                    <div className="flex-1 text-center border-r border-white/20">
+                        <div className="text-xs font-light text-white/70 mb-1">City Rank</div>
+                        <div className="text-xl font-bold text-white">12th</div>
                     </div>
-                    <div className="bg-white border border-zinc-200 rounded-xl p-3 flex flex-col justify-center items-center text-center shadow-sm">
-                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wide leading-tight mb-1">City Badges</span>
-                        <span className="text-lg font-bold text-zinc-900">1,255</span>
+
+                    {/* City Badges */}
+                    <div className="flex-1 text-center border-r border-white/20">
+                        <div className="text-xs font-light text-white/70 mb-1">City Badges</div>
+                        <div className="text-xl font-bold text-white">1,255</div>
                     </div>
-                    <div className="bg-white border border-zinc-200 rounded-xl p-3 flex flex-col justify-center items-center text-center shadow-sm">
-                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wide leading-tight mb-1">Your Badges</span>
-                        <span className="text-xl font-bold text-lime-dark">7</span>
+
+                    {/* Your Badges */}
+                    <div className="flex-1 text-center">
+                        <div className="text-xs font-light text-white/70 mb-1">Your Badges</div>
+                        <div className="text-xl font-bold text-white">7</div>
                     </div>
                 </div>
 
