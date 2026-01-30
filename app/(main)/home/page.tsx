@@ -76,7 +76,7 @@ export default function HomePage() {
             {/* "Your Upcoming" Section */}
             <div className="mb-8 mt-6">
                 <div className="px-6 mb-4">
-                    <h2 className="text-lg font-bold text-foreground">Your Upcoming</h2>
+                    <h2 className="text-lg font-bold text-white">Your Upcoming</h2>
                 </div>
 
                 {/* Horizontal Slider */}
@@ -149,7 +149,7 @@ export default function HomePage() {
             </div>
 
             <div className="px-6 mb-4">
-                <h2 className="text-lg font-bold text-foreground">Here&apos;s what&apos;s coming up near you</h2>
+                <h2 className="text-lg font-bold text-white">Here&apos;s what&apos;s coming up near you</h2>
             </div>
             <div className="px-6 space-y-4">
                 {feed.length > 0 ? (
